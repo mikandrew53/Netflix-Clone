@@ -1,1 +1,51 @@
-/* You can add global styles to this file, and also import other style files */
+// VARIABLES 
+$background-color: #141414;
+
+
+
+//RESET
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-size: 16px;
+}
+body{ 
+    overflow-X: hidden;
+    // background-color: $background-color;
+}
+ul{
+    list-style: none;
+    padding: 0;
+    margin: 0
+}
+a{
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+}
+p{
+    margin: 0;
+}
+
+form {
+    padding: 20px;
+}
+
+.landing {
+    height: 70vh;
+}
+
+
+.landing-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo:hover {
+    cursor: default;
+}
+.logo-img {
+    width: 200px;
+}
