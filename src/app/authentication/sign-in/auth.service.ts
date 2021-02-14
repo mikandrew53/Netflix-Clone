@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { of, Subject, throwError } from 'rxjs';
+import { User } from './user.model';
+import { Router } from '@angular/router';
 export interface AuthResponseData {
   idToken: string,
   email: string,
@@ -16,8 +18,10 @@ export interface AuthResponseData {
   providedIn: 'root'
 })
 export class AuthService {
+  user = new Subject<User>();
+  private tokenExpirationTimer: any;
 
-  constructor(private http: HttpClient ) { }
+  constructor(private http: HttpClient, private router: Router ) { }
 
   signup(email: string, password: string) {
     return this.http.post<AuthResponseData>(
@@ -43,12 +47,28 @@ export class AuthService {
           errorMessage = ' We have blocked all requests from this device due to unusual activity. Try again later.';
       }
       return throwError(errorMessage);
+    }), 
+    tap(resData => {
+      this.handleAuthentication(
+        resData.email,
+        resData.localId,
+        resData.idToken, 
+        +resData.expiresIn
+      );
     }));
     
     
   }
 
   signIn(email: string, password: string) {
+
+    // const data = {
+    //   TMDB_key: '2005019c276c141dd69953e09116e1ee'
+    // }
+    // this.http.post('https://netflix-clone-9fb80-default-rtdb.firebaseio.com/posts.json',  data).subscribe(responseData => {
+    //   console.log(responseData);
+    // });
+
     return this.http.post<AuthResponseData>(
       'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAqNPn9SlOiwFUGi0466PeGMMUtpizmIZ4',
       {
@@ -72,7 +92,57 @@ export class AuthService {
           errorMessage = 'The user account has been disabled by an administrator';
       }
       return throwError(errorMessage);
-    }))
+    }),
+    tap(resData => {
+      this.handleAuthentication(
+        resData.email,
+        resData.localId,
+        resData.idToken, 
+        +resData.expiresIn
+      );
+    })
+    )
+  }
+
+  private handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
+    const experationDate = new Date(new Date().getTime() + expiresIn * 1000);
+      const user = new User(
+        email,
+        userId,
+        token,
+        experationDate
+      );
+      this.user.next(user);
+      this.autoLogout(expiresIn * 1000);
+      localStorage.setItem('userData', JSON.stringify(user));
+  }
+
+  logout() {
+    this.user.next(null); 
+    this.router.navigate(['/signin']);
+    localStorage.removeItem('userData');
+    if(this.tokenExpirationTimer)
+      clearTimeout(this.tokenExpirationTimer);
+    this.tokenExpirationTimer = null;
+  }
+
+  autoLogin() {
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    if(!userData)
+      return;
+    const loadedUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate));
+    if(loadedUser.token){
+      this.user.next(loadedUser);
+      const expiresIn = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
+      this.router.navigate(['/browse']);
+      this.autoLogout(expiresIn);
+    }
+  }
+
+  autoLogout(expirationDuration: number){
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
   }
 
 }

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 import { AuthService, AuthResponseData } from './auth.service';
 
 @Component({
@@ -8,19 +9,22 @@ import { AuthService, AuthResponseData } from './auth.service';
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss']
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent implements OnInit, OnDestroy {
   isLoginMode = true;
-  
-  constructor(private authService:AuthService) { }
+  isAuthenticated = false;
+  userSub: Subscription;
+
+constructor(private authService:AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    this.userSub = this.authService.user.subscribe(user => this.isAuthenticated = !!user);
   }
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
   }
 
-  onSubmit(form: NgForm) {
+  async onSubmit(form: NgForm) {
     if(!form.valid)
       return;
     const email = form.value.email;
@@ -35,10 +39,18 @@ export class SignInComponent implements OnInit {
     }
       
     authObs.subscribe(
-      resData => console.log(resData),
+      resData =>  {
+        console.log(resData);
+        if(this.isAuthenticated)
+          this.router.navigate(['/browse']);
+      },
       error => console.log(error)
     );
     form.reset();
+  }
+
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
   }
 
 }
