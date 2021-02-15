@@ -1,13 +1,8 @@
-// const data = {
 //   TMDB_key: '2005019c276c141dd69953e09116e1ee'
-// }
-// this.http.post('https://netflix-clone-9fb80-default-rtdb.firebaseio.com/posts.json',  data).subscribe(responseData => {
-//   console.log(responseData);
-// });
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, tap, map } from 'rxjs/operators';
-import { BehaviorSubject, pipe, Subject, throwError } from 'rxjs';
+import { catchError, tap} from 'rxjs/operators';
+import { BehaviorSubject, throwError } from 'rxjs';
 import { User } from './user.model';
 import { Router } from '@angular/router';
 export interface AuthResponseData {
@@ -27,6 +22,7 @@ export class AuthService {
   user = new BehaviorSubject<User>(null);
   private tokenExpirationTimer: any;
   private authenticated:boolean = false;
+  private TMBD_token: string;
 
   constructor(private http: HttpClient, private router: Router ) { }
 
@@ -108,16 +104,20 @@ export class AuthService {
 
 
 
-  private handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
+  private async handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
     const experationDate = new Date(new Date().getTime() + expiresIn * 1000);
-      const user = new User(
-        email,
-        userId,
-        token,
-        experationDate
+    const user:User = new User(
+      email,
+      userId,
+      token,
+      experationDate,
       );
       this.user.next(user);
       this.authenticated = true;
+      await this.getTMDB_token();
+      user.setTMDB_token(this.TMBD_token);
+      console.log(user);
+      
       this.autoLogout(expiresIn * 1000);
       localStorage.setItem('userData', JSON.stringify(user));
   }
@@ -148,6 +148,7 @@ export class AuthService {
       const expiresIn = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
       this.router.navigate(['/browse']);
       this.autoLogout(expiresIn);
+
     }
   }
 
@@ -155,6 +156,14 @@ export class AuthService {
     this.tokenExpirationTimer = setTimeout(() => {
       this.logout();
     }, expirationDuration);
+  }
+
+  async getTMDB_token() {
+    const TMBD_response = await fetch('https://api.themoviedb.org/3/authentication/token/new?api_key=2005019c276c141dd69953e09116e1ee')
+    if(TMBD_response.ok) {
+      const TMBD_responseData = await TMBD_response.json();
+      this.TMBD_token = TMBD_responseData.request_token;
+    }
   }
 
 }
