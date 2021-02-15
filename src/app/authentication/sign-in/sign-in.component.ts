@@ -17,7 +17,11 @@ export class SignInComponent implements OnInit, OnDestroy {
 constructor(private authService:AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.userSub = this.authService.user.subscribe(user => this.isAuthenticated = !!user);
+    this.userSub = this.authService.user.subscribe(user => {
+      this.isAuthenticated = !!user;
+      console.log('wagwan');
+      
+    });
   }
 
   onSwitchMode() {
@@ -41,8 +45,11 @@ constructor(private authService:AuthService, private router: Router) { }
     authObs.subscribe(
       resData =>  {
         console.log(resData);
-        if(this.isAuthenticated)
-          this.router.navigate(['/browse']);
+        console.log('hello');
+        if(this.isAuthenticated){
+          
+          this.router.navigate(['browse']);
+        }
       },
       error => console.log(error)
     );

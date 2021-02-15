@@ -7,14 +7,9 @@ import { AppComponent } from './app.component';
 import { SignInComponent } from './authentication/sign-in/sign-in.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { BrowseComponent } from './browse/browse.component';
-import { RouterModule, Routes } from '@angular/router';
+import { AppRoutingModule } from './app.routing.module';
+import { AuthGuard } from './authentication/sign-in/auth.guard';
 
-
-const appRoutes: Routes = [
-  { path: '', component: LandingPageComponent },
-  { path: 'signin', component: SignInComponent },  
-  { path: 'browse', component: BrowseComponent },  
-]
 
 @NgModule({
   declarations: [
@@ -27,9 +22,9 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
