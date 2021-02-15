@@ -120,19 +120,8 @@ export class AuthService {
       this.authenticated = true;
       this.autoLogout(expiresIn * 1000);
       localStorage.setItem('userData', JSON.stringify(user));
-      console.log(this.guard());
   }
 
-  guard(){
-    let returnValue: any = 'Default'
-    // this.user.getValue()(
-    //   map(user => {
-    //     returnValue = !!user;
-    //   })
-    // )
-    returnValue = !!this.user.getValue();
-    return returnValue
-  }
 
   get isAuthenticated(){
     return this.authenticated;

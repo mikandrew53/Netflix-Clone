@@ -19,8 +19,6 @@ constructor(private authService:AuthService, private router: Router) { }
   ngOnInit(): void {
     this.userSub = this.authService.user.subscribe(user => {
       this.isAuthenticated = !!user;
-      console.log('wagwan');
-      
     });
   }
 
