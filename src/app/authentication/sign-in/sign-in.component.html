@@ -1,6 +1,19 @@
-<form class="sign-in" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+<div class="landing-background"></div>
+<div class="landing-background-overlay"></div>
+
+<div class="sign-in-page">
+    <div class="signin-top">
+        <a routerLink=""><img src="./../../assets/01_Netflix_Logo/01_Netflix_Logo_RGB/Netflix_Logo_RGB.png" alt="" class="logo-img"></a> 
+    </div>
+    
+    <div class="sign-in-background">
+     
+<form class="sign-in-form" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+    <h3>Sign In</h3>
+    <div class="sign-in-error" *ngIf="error">
+        <p>{{error}}</p>
+    </div>
     <div class="form-group">
-        <label for="email">E-mail</label>
         <input 
         type="email" 
         id="email"
@@ -8,10 +21,14 @@
         required
         email
         name="email"
+        class="sign-in-input"
+        [ngClass]="{'form-input-error': authForm}"
         >
+        <label for="email" class="form-label" [ngClass]="{'keep-label-up': !!authForm.value.email}">
+            <span class="form-label-content">Email</span>
+        </label>
     </div>
     <div class="form-group">
-        <label for="password">Password</label>
         <input 
         type="password"
         id="password"
@@ -19,18 +36,25 @@
         name="password"
         class="form-control"
         required 
-        minlength="6"
+        minlength="6"    
+        class="sign-in-input"
         >
+        <label for="password" class="form-label" [ngClass]="{'keep-label-up': !!authForm.value.password}">
+            <span class="form-label-content">Password</span>
+        </label>
     </div>
     <div>
         <button 
         type="submit" 
         [disabled]="!authForm.valid"
+        class="Sign-in-btn"
         >
-        {{ isLoginMode ? 'Login' : 'Sign Up'}} 
-    </button> | 
-        <button (click)="onSwitchMode()" type="button">Switch to {{ isLoginMode ? 'Sign Up' : 'Log In'}}</button>
+        {{ isLoginMode ? 'Sign In' : 'Sign Up'}} 
+    </button> 
+        <!-- <button (click)="onSwitchMode()" type="button">Switch to {{ isLoginMode ? 'Sign Up' : 'Sign In'}}</button> -->
     </div>
 </form>
+    </div>
+</div>
 
-<a routerLink="/">back</a>
+<!-- <a routerLink="/">back</a> -->

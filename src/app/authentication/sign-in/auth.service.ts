@@ -114,10 +114,6 @@ export class AuthService {
       );
       this.user.next(user);
       this.authenticated = true;
-      await this.getTMDB_token();
-      user.setTMDB_token(this.TMBD_token);
-      console.log(user);
-      
       this.autoLogout(expiresIn * 1000);
       localStorage.setItem('userData', JSON.stringify(user));
   }
@@ -129,7 +125,7 @@ export class AuthService {
 
   logout() {
     this.user.next(null); 
-    this.router.navigate(['/signin']);
+    this.router.navigate(['/login']);
     localStorage.removeItem('userData');
     this.authenticated = false;
     if(this.tokenExpirationTimer)
@@ -165,5 +161,4 @@ export class AuthService {
       this.TMBD_token = TMBD_responseData.request_token;
     }
   }
-
 }

@@ -9,6 +9,9 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { BrowseComponent } from './browse/browse.component';
 import { AppRoutingModule } from './app.routing.module';
 import { AuthGuard } from './authentication/sign-in/auth.guard';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input';
+
 
 
 @NgModule({
@@ -22,7 +25,9 @@ import { AuthGuard } from './authentication/sign-in/auth.guard';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatInputModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

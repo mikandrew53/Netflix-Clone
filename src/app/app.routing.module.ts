@@ -7,7 +7,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 
 const appRoutes: Routes = [
     { path: '', component: LandingPageComponent },
-    { path: 'signin', component: SignInComponent },  
+    { path: 'login', component: SignInComponent },  
     { 
       path: 'browse',
       component: BrowseComponent,

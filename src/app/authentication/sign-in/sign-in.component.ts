@@ -15,6 +15,7 @@ export class SignInComponent implements OnInit, OnDestroy {
   userSub: Subscription;
 
 constructor(private authService:AuthService, private router: Router) { }
+  error = false;
 
   ngOnInit(): void {
     this.userSub = this.authService.user.subscribe(user => {
@@ -26,7 +27,8 @@ constructor(private authService:AuthService, private router: Router) { }
     this.isLoginMode = !this.isLoginMode;
   }
 
-  async onSubmit(form: NgForm) {
+  onSubmit(form: NgForm) {
+    console.log(form);
     if(!form.valid)
       return;
     const email = form.value.email;
@@ -42,14 +44,10 @@ constructor(private authService:AuthService, private router: Router) { }
       
     authObs.subscribe(
       resData =>  {
-        console.log(resData);
-        console.log('hello');
-        if(this.isAuthenticated){
-          
+        if(this.isAuthenticated)
           this.router.navigate(['browse']);
-        }
       },
-      error => console.log(error)
+      error => this.error = error
     );
     form.reset();
   }
