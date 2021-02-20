@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { AuthService, AuthResponseData } from './auth.service';
+import { AuthService, AuthResponseData, SignInError } from './auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -13,14 +13,20 @@ export class SignInComponent implements OnInit, OnDestroy {
   isLoginMode = true;
   isAuthenticated = false;
   userSub: Subscription;
+  @ViewChild('EmailInput', {static: true}) emailInput:ElementRef;
+  @ViewChild('PasswordInput', {static: true}) passwordInput:ElementRef;
 
 constructor(private authService:AuthService, private router: Router) { }
-  error = false;
+  error:SignInError;
+  controls =  {
+    email: { valid: false, errorMsg: '', touched: false },
+    password: { valid: false, errorMsg: '', touched: false }
+  }
 
   ngOnInit(): void {
     this.userSub = this.authService.user.subscribe(user => {
       this.isAuthenticated = !!user;
-    });
+    });    
   }
 
   onSwitchMode() {
@@ -28,7 +34,6 @@ constructor(private authService:AuthService, private router: Router) { }
   }
 
   onSubmit(form: NgForm) {
-    console.log(form);
     if(!form.valid)
       return;
     const email = form.value.email;
@@ -47,13 +52,69 @@ constructor(private authService:AuthService, private router: Router) { }
         if(this.isAuthenticated)
           this.router.navigate(['browse']);
       },
-      error => this.error = error
+      error => this.handleServerError(error)
     );
-    form.reset();
+  }
+
+  handleServerError(error:SignInError){
+    this.error = error;
+    if(error.clearEmail){
+      this.emailInput.nativeElement.value = '';
+      this.controls.email.valid = false;
+      this.controls.email.errorMsg = '';
+    }
+    if(error.clearPassword){
+      this.passwordInput.nativeElement.value = '';
+      this.controls.password.valid = false;
+    }
+
+
   }
 
   ngOnDestroy() {
     this.userSub.unsubscribe();
+  }
+
+  onEmailFocousOut(form: NgForm){
+    this.controls.email.touched = true;
+    if(form.controls.email.status === 'INVALID') {
+      this.controls.email.valid = false;
+      this.controls.email.errorMsg = 'Please enter a valid email.';
+    }else
+      this.controls.email.valid = true;
+  }
+  
+  onEmailKeyDown(form:NgForm){
+    if(!this.controls.email.touched)
+      return;
+
+    if(form.controls.email.status === 'INVALID') {
+      this.controls.email.valid = false;
+      this.controls.email.errorMsg = 'Please enter a valid email.';
+    }else
+      this.controls.email.valid = true;
+  }
+
+  onPasswordFocousOut(form:NgForm){
+    this.controls.password.touched = true;
+    if(form.controls.password.status === 'INVALID' ){
+      this.controls.password.valid = false;
+      this.controls.password.errorMsg = 'Your password must contain at least 6 characters.'
+    }else {
+      this.controls.password.valid = true;
+    }
+  }
+  
+  onPasswordKeyDown(form:NgForm){
+    if(!this.controls.password.touched)
+      return;
+
+    if(form.controls.password.status === 'INVALID' ){
+      this.controls.password.valid = false;
+      this.controls.password.errorMsg = 'Your password must contain at least 6 characters.'
+    }else {
+      this.controls.password.valid = true;
+    }
   }
 
 }

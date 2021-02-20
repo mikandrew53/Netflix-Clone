@@ -14,6 +14,12 @@ export interface AuthResponseData {
   registered?: boolean
 }
 
+export interface SignInError {
+  msg: string,
+  clearEmail: boolean,
+  clearPassword: boolean
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -85,21 +91,39 @@ export class AuthService {
   }
 
   private handleSigninError(errorRes: HttpErrorResponse){
-    let errorMessage = 'An unkown error occurred';
+    let error:SignInError = {
+      msg: 'An unkown error occurred',
+      clearEmail: false,
+      clearPassword: false
+    }
+    
+    
       if(!errorRes.error || !errorRes.error.error){
-        return throwError(errorMessage);
+        return throwError(error);
       }
       switch (errorRes.error.error.message){
         case 'EMAIL_NOT_FOUND':
-          errorMessage = 'There is no user record corresponding to this identifier. The user may have been deleted.';
+          error = {
+            msg: 'There is no user record corresponding to this identifier. The user may have been deleted.',
+            clearEmail: true,
+            clearPassword: true
+          };
           break;
         case 'INVALID_PASSWORD':
-          errorMessage = 'The password is invalid or the user does not have a password';
+          error = {
+            msg: 'The password is invalid or the user does not have a password',
+            clearEmail: false,
+            clearPassword: true
+          };
           break;
         case 'USER_DISABLED':
-          errorMessage = 'The user account has been disabled by an administrator';
+          error = { 
+            msg: 'The user account has been disabled by an administrator',
+            clearEmail: false,
+            clearPassword: false
+          };
       }
-      return throwError(errorMessage);
+      return throwError(error);
   }
 
 

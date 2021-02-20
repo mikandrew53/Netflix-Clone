@@ -10,10 +10,10 @@
      
 <form class="sign-in-form" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
     <h3>Sign In</h3>
-    <div class="sign-in-error" *ngIf="error">
-        <p>{{error}}</p>
+    <div class="sign-in-error" *ngIf="!!error">
+        <p>{{error.msg}}</p>
     </div>
-    <div class="form-group">
+    <div class="form-group" [ngClass]="{'no-margin': controls.email.touched && !controls.email.valid}">
         <input 
         type="email" 
         id="email"
@@ -22,13 +22,21 @@
         email
         name="email"
         class="sign-in-input"
-        [ngClass]="{'form-input-error': authForm}"
+        [ngClass]="{'form-input-error': !controls.email.valid && controls.email.touched}"
+        (focusout)="onEmailFocousOut(authForm)"
+        (keyup)="onEmailKeyDown(authForm)"
+        #EmailInput
         >
-        <label for="email" class="form-label" [ngClass]="{'keep-label-up': !!authForm.value.email}">
+        <label for="email" class="form-label" [ngClass]="{'keep-label-up': !!emailInput.nativeElement.value}">
             <span class="form-label-content">Email</span>
         </label>
     </div>
-    <div class="form-group">
+    <p 
+    *ngIf="controls.email.touched && !controls.email.valid"
+    class="sign-in-error-msg"
+    >{{ controls.email.errorMsg }}</p>
+
+    <div class="form-group" style="margin-bottom: 0;">
         <input 
         type="password"
         id="password"
@@ -38,11 +46,20 @@
         required 
         minlength="6"    
         class="sign-in-input"
+        [ngClass]="{'form-input-error': !controls.password.valid && controls.password.touched}"
+        (focusout)="onPasswordFocousOut(authForm)"
+        (keyup)="onPasswordKeyDown(authForm)"
+        #PasswordInput
         >
-        <label for="password" class="form-label" [ngClass]="{'keep-label-up': !!authForm.value.password}">
+        <label for="password" class="form-label" [ngClass]="{'keep-label-up': !!passwordInput.nativeElement.value}">
             <span class="form-label-content">Password</span>
         </label>
     </div>
+    <p 
+    *ngIf="controls.password.touched && !controls.password.valid"
+    class="sign-in-error-msg"
+    >{{ controls.password.errorMsg }}</p>
+
     <div>
         <button 
         type="submit" 
