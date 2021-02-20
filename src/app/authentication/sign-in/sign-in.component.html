@@ -30,10 +30,7 @@
                     <span class="form-label-content">Email</span>
                 </label>
             </div>
-            <p 
-            *ngIf="controls.email.touched && !controls.email.valid"
-            class="sign-in-error-msg"
-            >{{ controls.email.errorMsg }}</p>
+            <p *ngIf="controls.email.touched && !controls.email.valid" class="sign-in-error-msg">{{ controls.email.errorMsg }}</p>
 
             <div class="form-group" style="margin-bottom: 0;">
                 <input 
@@ -54,10 +51,7 @@
                     <span class="form-label-content">Password</span>
                 </label>
             </div>
-            <p 
-            *ngIf="controls.password.touched && !controls.password.valid"
-            class="sign-in-error-msg"
-            >{{ controls.password.errorMsg }}</p>
+            <p *ngIf="controls.password.touched && !controls.password.valid"class="sign-in-error-msg">{{ controls.password.errorMsg }}</p>
 
             <div>
                 <button 
@@ -72,6 +66,8 @@
             <p class="new-to-netflix">New to Netflix? <a routerLink=''>Sign up now</a>.</p>
         </form>
     </div>
+
+    <div class="sign-in-bottom"></div>
 </div>
 
 <!-- <a routerLink="/">back</a> -->

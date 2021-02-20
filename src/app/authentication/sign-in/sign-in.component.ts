@@ -52,20 +52,26 @@ constructor(private authService:AuthService, private router: Router) { }
         if(this.isAuthenticated)
           this.router.navigate(['browse']);
       },
-      error => this.handleServerError(error)
+      error => this.handleServerError(error, form)
     );
   }
 
-  handleServerError(error:SignInError){
+  handleServerError(error:SignInError, form:NgForm){
     this.error = error;
+    this.controls.email.touched = true;
+    this.controls.password.touched = true;
     if(error.clearEmail){
       this.emailInput.nativeElement.value = '';
       this.controls.email.valid = false;
       this.controls.email.errorMsg = '';
+      form.controls.email.reset();
+
     }
     if(error.clearPassword){
       this.passwordInput.nativeElement.value = '';
+      this.controls.password.errorMsg = '';
       this.controls.password.valid = false;
+      form.controls.password.reset();
     }
 
 
@@ -97,6 +103,7 @@ constructor(private authService:AuthService, private router: Router) { }
 
   onPasswordFocousOut(form:NgForm){
     this.controls.password.touched = true;
+    console.log(form);
     if(form.controls.password.status === 'INVALID' ){
       this.controls.password.valid = false;
       this.controls.password.errorMsg = 'Your password must contain at least 6 characters.'

@@ -59,14 +59,14 @@ form {
     cursor: default;
 }
 .logo-img {
-    width: 200px;
+    width: 210px;
 }
 
 .landing-background {
     height: 100vh;
     width: 100%;
     position: absolute;
-    background: url('./assets/CA-en-20210208-popsignuptwoweeks-perspective_alpha_website_large.jpg');
+    background: url('./assets/CA-en-20210215-popsignuptwoweeks-perspective_alpha_website_large.jpg');
     &::after{
         content: '';
         height: 100vh;
@@ -86,6 +86,7 @@ form {
 .sign-in-page {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     position: relative;
     height: 100vh;
 }
@@ -211,10 +212,15 @@ form {
     }
 }
 
+.sign-in-bottom{
+    height: 178px;
+    width: 100vw;
+    background-color: rgba(0,0,0,.75);
+}
 
 
 
 a{
-    position: relative;
+    // position: relative;
 }
 
