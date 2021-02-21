@@ -18,6 +18,8 @@ export class SignInComponent implements OnInit, OnDestroy {
 
 constructor(private authService:AuthService, private router: Router) { }
   error:SignInError;
+  emailErrorMsg:string = 'Please enter a valid email.'
+  passwordErrorMsg:string = 'Your password must contain at least 6 characters.'
   controls =  {
     email: { valid: false, errorMsg: '', touched: false },
     password: { valid: false, errorMsg: '', touched: false }
@@ -34,8 +36,20 @@ constructor(private authService:AuthService, private router: Router) { }
   }
 
   onSubmit(form: NgForm) {
-    if(!form.valid)
+    if(!form.valid){
+      if(!this.controls.email.touched){
+        this.controls.email.valid = false;
+        this.controls.email.errorMsg = this.emailErrorMsg;
+        this.controls.email.touched = true;
+      }
+      if(!this.controls.password.touched){
+        this.controls.password.valid = false;
+        this.controls.password.errorMsg = this.passwordErrorMsg;
+        this.controls.password.touched = true;
+      }
       return;
+    }
+      
     const email = form.value.email;
     const password = form.value.password;
 
@@ -74,7 +88,7 @@ constructor(private authService:AuthService, private router: Router) { }
       form.controls.password.reset();
     }
 
-
+    // https://netflix-clone-9fb80.firebaseapp.com/__/auth/handler
   }
 
   ngOnDestroy() {
@@ -85,7 +99,7 @@ constructor(private authService:AuthService, private router: Router) { }
     this.controls.email.touched = true;
     if(form.controls.email.status === 'INVALID') {
       this.controls.email.valid = false;
-      this.controls.email.errorMsg = 'Please enter a valid email.';
+      this.controls.email.errorMsg = this.emailErrorMsg;
     }else
       this.controls.email.valid = true;
   }
@@ -96,7 +110,7 @@ constructor(private authService:AuthService, private router: Router) { }
 
     if(form.controls.email.status === 'INVALID') {
       this.controls.email.valid = false;
-      this.controls.email.errorMsg = 'Please enter a valid email.';
+      this.controls.email.errorMsg = this.emailErrorMsg;
     }else
       this.controls.email.valid = true;
   }
@@ -106,7 +120,7 @@ constructor(private authService:AuthService, private router: Router) { }
     console.log(form);
     if(form.controls.password.status === 'INVALID' ){
       this.controls.password.valid = false;
-      this.controls.password.errorMsg = 'Your password must contain at least 6 characters.'
+      this.controls.password.errorMsg = this.passwordErrorMsg;
     }else {
       this.controls.password.valid = true;
     }
@@ -118,7 +132,7 @@ constructor(private authService:AuthService, private router: Router) { }
 
     if(form.controls.password.status === 'INVALID' ){
       this.controls.password.valid = false;
-      this.controls.password.errorMsg = 'Your password must contain at least 6 characters.'
+      this.controls.password.errorMsg = this.passwordErrorMsg;
     }else {
       this.controls.password.valid = true;
     }
