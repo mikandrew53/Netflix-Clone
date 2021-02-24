@@ -178,13 +178,17 @@ export class AuthService {
   }
 
   logout() {
-    this.user.next(null); 
-    this.router.navigate(['/login']);
-    localStorage.removeItem('userData');
-    this.authenticated = false;
-    if(this.tokenExpirationTimer)
-      clearTimeout(this.tokenExpirationTimer);
-    this.tokenExpirationTimer = null;
+    firebase.auth().signOut().then(() => {
+      this.user.next(null); 
+      this.router.navigate(['/login']);
+      localStorage.removeItem('userData');
+      this.authenticated = false;
+      if(this.tokenExpirationTimer)
+        clearTimeout(this.tokenExpirationTimer);
+      this.tokenExpirationTimer = null;
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   autoLogin() {
