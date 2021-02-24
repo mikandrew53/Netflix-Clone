@@ -11,6 +11,10 @@ import { AppRoutingModule } from './app.routing.module';
 import { AuthGuard } from './authentication/sign-in/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
 
 
 
@@ -27,7 +31,10 @@ import { MatInputModule } from '@angular/material/input';
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatInputModule
+    MatInputModule,
+    FontAwesomeModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

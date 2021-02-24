@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService, AuthResponseData, SignInError } from './auth.service';
+import firebase from "firebase";
 
 @Component({
   selector: 'app-sign-in',
@@ -136,6 +137,10 @@ constructor(private authService:AuthService, private router: Router) { }
     }else {
       this.controls.password.valid = true;
     }
+  }
+
+  loginWithFacebook(){
+    this.authService.facebookSigIn();
   }
 
 }

@@ -60,8 +60,13 @@
                 >
                 {{ isLoginMode ? 'Sign In' : 'Sign Up'}} 
             </button> 
-                <button (click)="onSwitchMode()" type="button">Switch to {{ isLoginMode ? 'Sign Up' : 'Sign In'}}</button>
+                <!-- <button (click)="onSwitchMode()" type="button">Switch to {{ isLoginMode ? 'Sign Up' : 'Sign In'}}</button> -->
             </div>
+            <!-- <fa-icon [icon]="faFacebookSquare" class="facebook-icon"></fa-icon> -->
+            <a class="login-with-facebook-link" (click)="loginWithFacebook()">
+                <img src="./../../../assets/facebook.png" class="facebook-icon" alt="">
+                <p>Login with Facebook</p>
+            </a>
             <p class="new-to-netflix">New to Netflix? <a routerLink=''>Sign up now</a>.</p>
         </form>
     </div>

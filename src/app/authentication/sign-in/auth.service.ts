@@ -5,6 +5,8 @@ import { catchError, tap} from 'rxjs/operators';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { User } from './user.model';
 import { Router } from '@angular/router';
+import firebase from "firebase";
+
 export interface AuthResponseData {
   idToken: string,
   email: string,
@@ -29,8 +31,12 @@ export class AuthService {
   private tokenExpirationTimer: any;
   private authenticated:boolean = false;
   private TMBD_token: string;
+  
 
-  constructor(private http: HttpClient, private router: Router ) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    ) { }
 
   signup(email: string, password: string) {
     return this.http.post<AuthResponseData>(
@@ -90,6 +96,29 @@ export class AuthService {
     )
   }
 
+
+  facebookSigIn(){
+    let provider = new firebase.auth.FacebookAuthProvider();
+    firebase.auth().signInWithPopup(provider)
+  .then((result) => {
+    /** @type {firebase.auth.OAuthCredential} */
+    this.handleAuthentication(result.user.email, result.user.uid, result.credential.accessToken, 3600);
+    this.router.navigate(['/browse'])
+  })
+  .catch((error) => {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+
+    // ...
+  });
+
+  }
+
   private handleSigninError(errorRes: HttpErrorResponse){
     let error:SignInError = {
       msg: 'An unkown error occurred',
@@ -129,6 +158,8 @@ export class AuthService {
 
 
   private async handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
+    console.log(userId);
+    
     const experationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user:User = new User(
       email,
