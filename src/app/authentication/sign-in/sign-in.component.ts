@@ -118,7 +118,6 @@ constructor(private authService:AuthService, private router: Router) { }
 
   onPasswordFocousOut(form:NgForm){
     this.controls.password.touched = true;
-    console.log(form);
     if(form.controls.password.status === 'INVALID' ){
       this.controls.password.valid = false;
       this.controls.password.errorMsg = this.passwordErrorMsg;

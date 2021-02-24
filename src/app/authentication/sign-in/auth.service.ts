@@ -101,9 +101,10 @@ export class AuthService {
     let provider = new firebase.auth.FacebookAuthProvider();
     firebase.auth().signInWithPopup(provider)
   .then((result) => {
-    /** @type {firebase.auth.OAuthCredential} */
-    this.handleAuthentication(result.user.email, result.user.uid, result.credential.accessToken, 3600);
-    this.router.navigate(['/browse'])
+    let credential = result.credential as firebase.auth.OAuthCredential;
+    let token = credential.accessToken;
+    this.handleAuthentication(result.user.email, result.user.uid, token, 3600);
+    this.router.navigate(['/browse']);
   })
   .catch((error) => {
     // Handle Errors here.
@@ -158,8 +159,6 @@ export class AuthService {
 
 
   private async handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
-    console.log(userId);
-    
     const experationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user:User = new User(
       email,
