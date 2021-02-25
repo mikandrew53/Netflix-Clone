@@ -21,6 +21,7 @@ constructor(private authService:AuthService, private router: Router) { }
   error:SignInError;
   emailErrorMsg:string = 'Please enter a valid email.'
   passwordErrorMsg:string = 'Your password must contain at least 6 characters.'
+  showGoogleMsg = false;
   controls =  {
     email: { valid: false, errorMsg: '', touched: false },
     password: { valid: false, errorMsg: '', touched: false }

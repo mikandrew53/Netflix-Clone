@@ -207,6 +207,7 @@ form {
 
 .new-to-netflix{
     color: #737373;
+    margin-bottom: 20px;
     a:hover{
         text-decoration: underline;
     }
@@ -228,12 +229,36 @@ form {
     display: flex;
     align-items: center;
     width: fit-content;
-    p {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.form-paragraph{
+    font-size: 13px;
+    color: #737373;
+    span, a{
+        color: #025fc4;
         font-size: 13px;
-        color: #737373;
+        &:hover{
+            text-decoration: underline;
+            cursor: pointer;
+        }
     }
 }
 
+.google-msg{
+    opacity: 0;
+    transition: opacity 250ms ease-in-out;
+    margin-top: 10px;
+}
+
+.show{
+    opacity: 1;
+}
+
+.form-bottom{
+    // margin-top: 20px;
+}
 
 
 a{
