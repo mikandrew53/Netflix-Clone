@@ -70,14 +70,33 @@
                 </a>
                 <p class="new-to-netflix">New to Netflix? <a routerLink=''>Sign up now</a>.</p>
                 <p class="form-paragraph">This page is not protected by Google reCAPTCHA to ensure you're not a bot. <span (click)="showGoogleMsg = !showGoogleMsg" *ngIf="!showGoogleMsg">Learn more.</span></p>
-                <p [ngClass]="{'show': showGoogleMsg}" class="form-paragraph google-msg">The information collected by Google reCAPTCHA is subject to the Google<a href="https://policies.google.com/privacy" target="_blank">Privacy Policy</a>  and <a href="https://policies.google.com/terms" target="_blank">Terms of Service</a>, and is used for providing, maintaining, and improving the reCAPTCHA service and for general security purposes (it is not used for personalized advertising by Google).</p>
+                <p [ngClass]="{'show': showGoogleMsg}" class="form-paragraph google-msg">The information collected by Google reCAPTCHA is subject to the Google <a href="https://policies.google.com/privacy" target="_blank">Privacy Policy</a>  and <a href="https://policies.google.com/terms" target="_blank">Terms of Service</a>, and is used for providing, maintaining, and improving the reCAPTCHA service and for general security purposes (it is not used for personalized advertising by Google).</p>
             </div>
         </form>
     </div>
 
     <div class="sign-in-bottom">
-        <p class="">Question? Call<a href="tel:1-844-542-4813">1-844-542-4813</a></p> 
-
+        <div class="sign-in-bottom-wrapper">
+            <div class="info-top">
+                <p class="">Question? Call <a href="tel:1-844-542-4813">1-844-542-4813</a></p> 
+            </div>
+            <div class="info-middle">
+                <a href="">FAQ</a>
+                <a href="">Help Center</a>
+                <a href="">Terms of Use</a>
+                <a href="">Privacy</a>
+                <a href="">Cookie Preferences</a>
+                <a href="">Corporate Information</a>
+            </div>
+            <div class="info-bottom">
+                <div class="languages">
+                    <fa-icon [icon]="faGlobe"></fa-icon>
+                    <select name="languages">
+                        <option value="English">English</option>
+                    </select>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

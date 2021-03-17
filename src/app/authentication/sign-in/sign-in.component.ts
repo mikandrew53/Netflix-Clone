@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService, AuthResponseData, SignInError } from './auth.service';
+import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 import firebase from "firebase";
 
 @Component({
@@ -14,6 +15,7 @@ export class SignInComponent implements OnInit, OnDestroy {
   isLoginMode = true;
   isAuthenticated = false;
   userSub: Subscription;
+  faGlobe = faGlobe
   @ViewChild('EmailInput', {static: true}) emailInput:ElementRef;
   @ViewChild('PasswordInput', {static: true}) passwordInput:ElementRef;
 
