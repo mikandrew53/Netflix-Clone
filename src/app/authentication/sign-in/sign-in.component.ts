@@ -144,5 +144,4 @@ constructor(private authService:AuthService, private router: Router) { }
   loginWithFacebook(){
     this.authService.facebookSigIn();
   }
-
 }

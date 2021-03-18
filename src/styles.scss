@@ -302,16 +302,26 @@ a{
 .info-bottom {
     max-width: 100%;
     .languages{
+        border: 0.5px solid #262626;
         border-radius: 4px;
-        padding: 12px 0;
+        padding: 12px 10px;
         width: fit-content;
         background-color: #000000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     select{
         background-color: #000000;
         color: #737373;
         outline: none;
         border: none;   
+        margin-left: 10px;
+        font-size: 0.7rem;
+        span {
+            color: red;
+        }
+        
     }
 }
 
