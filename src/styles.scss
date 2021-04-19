@@ -83,6 +83,8 @@ form {
     background-color: rgba(0,0,0,.5);
 }
 
+
+// sign in page
 .sign-in-page {
     display: flex;
     flex-direction: column;
@@ -319,9 +321,54 @@ a{
         margin-left: 10px;
         font-size: 0.7rem;
         span {
-            color: red;
+            color: rgb(255, 0, 0);
         }
         
     }
 }
 
+
+
+@media (max-width: 780px){
+    .sign-in-page-overlay {
+        background-color: #000;
+    }
+
+    .sign-in-background {
+        width: 100%;
+        padding: 0 5%;
+        height: fit-content;
+    }
+
+    .sign-in-bottom-wrapper {
+        width: 100%;
+        padding: 0 5%;
+    }
+    .sign-in-bottom {
+        border-top: solid #737373 1px;
+    }
+
+    .sign-in-page {
+        justify-content: flex-start;
+    }
+    .google-msg {
+        padding-bottom: 40px;
+    }
+}
+
+
+@media (max-width: 500px){
+    .info-middle{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .logo-img {
+        width: 110px;
+        padding-top: 10px;
+    }
+}
+@media (max-width: 250px){
+    .info-middle{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
