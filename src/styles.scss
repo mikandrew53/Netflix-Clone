@@ -1,5 +1,6 @@
 // VARIABLES 
 $background-color: #141414;
+$background-color: #fff;
 $error: #e87c03;
 $netflix-red: #e50914; 
 
@@ -73,32 +74,67 @@ form {
     }
 }
 
+.languages{
+    position: relative;
+    select{
+        background-color: transparent ;
+        height: 40px;
+        color: #ffffff;
+        outline: none;
+        border: 1px solid #838384;
+        border-radius: 2px;
+        margin: 0;
+        // margin-left: 10px;
+        // margin-right: 20px ;
+        padding: 10px 30px;
+        font-size: 0.8rem;
+        width: 100%;
+        appearance: none;
+        // background-color: #000101;
+        background-color: rgba($color: #0f0d10, $alpha: 0.8);
+        span {
+            // color: rgb(255, 0, 0);
+        } 
+    }
+    .globe{
+        position: absolute;
+        left: 6px;
+        top: 11px;
+        transform: scale(0.75);
+        // padding-right: 10px;
+        pointer-events: none;
+    }
+    .select-arrow{
+        display: block;
+        // width: 1rem;
+        // height: 1rem ;
+        position: absolute;
+        top: 1px;
+        right: 0px;
+        // height: 100%;
+        // margin: auto;
+        width: 20px;
+        pointer-events: none;
+        border-radius: 2px;
+        &::before{
+            content: '';
+            position: absolute ;
+            width: 0;
+            height: 0 ;
+            // left: -3px;
+            top: 16px;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #ffffff; 
+        }
+    }
+ }
+
 .landing-top-right{
     display: flex;
     align-items: center;
     margin-right: 3%;
-    .languages{
-        border: 0.5px solid #828282;
-        border-radius: 2px;
-        padding: 7px 5px;
-        width: fit-content;
-        background-color: #1400007c;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    max-width: 100%;
-    select{
-        background-color: transparent ;
-        color: #ffffff;
-        outline: none;
-        border: none;   
-        margin-left: 10px;
-        font-size: 0.7rem;
-        span {
-            color: rgb(255, 0, 0);
-        } 
-    }
+    // max-width: 100%;
 }
 
 .logo:hover {
@@ -111,24 +147,30 @@ form {
 }
 
 .landing-background {
-    height: 100vh;
+    // min-height: 100vh;
+    // max-height: 110vh;
+    height: 110vh;
     width: 100%;
     position: absolute;
-    background: url('./assets/CA-en-20210215-popsignuptwoweeks-perspective_alpha_website_large.jpg');
+    background: url('./assets/CA-en-20210322-popsignuptwoweeks-perspective_alpha_website_large.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
     &::after{
         content: '';
-        height: 100vh;
+        height: 110vh;
+        // min-height: 100vh;
+        // max-height: 110vh;
         width: 100vw;
         position: absolute;
-        background-color: rgba(0,0,0,.1);
+        background-color: rgba(0,0,0,0.4);
     }
 }
 
 .landing-background-overlay{
-    height: 100vh;
-    width: 100vw;
-    position: absolute;
-    background-color: rgba(0,0,0,.6);
+    // height: 100vh;
+    // width: 100vw;
+    // position: absolute;
+    // background-color: rgba(0,0,0,0.4);
 }
 
 
@@ -138,13 +180,36 @@ form {
     flex-direction: column;
     justify-content: space-between;
     position: relative;
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
+    // max-height: 110vh;s
+    background: url('./assets/CA-en-20210322-popsignuptwoweeks-perspective_alpha_website_large.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    // z-index: 1;
+     &::after{
+        content: '';
+        height: 100%;
+        // min-height: 100vh;
+        // max-height: 110vh;
+        width: 100vw;
+        position: absolute;
+        background-color: rgba(0,0,0,0.4);
+        z-index: 1;
+    }
 }
 
 .signin-top {
+    z-index: 2;
     img:hover {
         cursor: pointer;
     }
+}
+
+.sign-in-form-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .sign-in-background {
@@ -153,11 +218,12 @@ form {
     background-color: rgba(0,0,0,.75);
     border-radius: 4px;
     width: 450px;
-    height: 660px;
+    // height: 660px;
     display: flex;
     justify-content: center;
     // align-items: center;
     padding: 60px 68px 40px;
+    margin-bottom: 90px;
 }
 
 .sign-in-form{
@@ -173,7 +239,7 @@ form {
 }
 .form-group{ 
     position: relative;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
 }
 .no-margin {
     margin-bottom: 0;
@@ -247,7 +313,7 @@ form {
     border: none;
     border-radius: 4px;
     color: #fff;
-    margin: 24px 0 12px;
+    margin: 40px 0 12px;
     padding: 15px 0;
     &:hover{
         cursor: pointer;
@@ -263,6 +329,9 @@ form {
 }
 
 .sign-in-bottom{
+    // position: absolute;
+    // bottom: 0;
+    z-index: 2;
     height: 178px;
     width: 100vw;
     background-color: rgba(0,0,0,.75);
@@ -278,7 +347,7 @@ form {
     display: flex;
     align-items: center;
     width: fit-content;
-    margin-top: 40px;
+    margin-top: 70px;
     margin-bottom: 20px;
 }
 
@@ -318,7 +387,7 @@ a{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 30px 0;
+    padding: 30px 0 50px 0;
     margin: 0 auto;
     color: #737373;
     height: fit-content;
@@ -350,26 +419,17 @@ a{
 
 .info-bottom {
     .languages{
+        width: 110px;
         border: 0.5px solid #262626;
-        border-radius: 4px;
-        padding: 12px 10px;
-        width: fit-content;
-        background-color: #000000;
-        display: flex;
-        justify-content: center;
-        align-items: center;
     }
     max-width: 100%;
     select{
-        background-color: transparent;
         color: #737373;
-        outline: none;
-        border: none;   
-        margin-left: 10px;
-        font-size: 0.7rem;
-        span {
-            color: rgb(255, 0, 0);
-        } 
+    }
+    .select-arrow {
+        &::before{
+            border-top: 5px solid #737373; 
+        }
     }
 }
 

@@ -1,79 +1,81 @@
-<div class="landing-background sign-in-page-background"></div>
-<div class="landing-background-overlay sign-in-page-overlay"></div>
+<!-- <div class="landing-background sign-in-page-background"></div> -->
+<!-- <div class="landing-background-overlay sign-in-page-overlay"></div> -->
 
 <div class="sign-in-page">
     <div class="signin-top">
         <a routerLink=""><img src="./../../assets/01_Netflix_Logo/01_Netflix_Logo_RGB/Netflix_Logo_RGB.png" alt="" class="logo-img"></a> 
+        <div class="sign-in-form-wrapper">
+            <div class="sign-in-background">        
+                <form class="sign-in-form" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+                    <h3>Sign In</h3>
+                    <div class="sign-in-error" *ngIf="!!error">
+                        <p>{{error.msg}}</p>
+                    </div>
+                    <div class="form-group" [ngClass]="{'no-margin': controls.email.touched && !controls.email.valid}">
+                        <input 
+                        type="email" 
+                        id="email"
+                        ngModel
+                        required
+                        email
+                        name="email"
+                        class="sign-in-input"
+                        [ngClass]="{'form-input-error': !controls.email.valid && controls.email.touched}"
+                        (focusout)="onEmailFocousOut(authForm)"
+                        (keyup)="onEmailKeyDown(authForm)"
+                        #EmailInput
+                        >
+                        <label for="email" class="form-label" [ngClass]="{'keep-label-up': !!emailInput.nativeElement.value}">
+                            <span class="form-label-content">Email</span>
+                        </label>
+                    </div>
+                    <p *ngIf="controls.email.touched && !controls.email.valid" class="sign-in-error-msg">{{ controls.email.errorMsg }}</p>
+        
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <input 
+                        type="password"
+                        id="password"
+                        ngModel
+                        name="password"
+                        class="form-control"
+                        required 
+                        minlength="6"    
+                        class="sign-in-input"
+                        [ngClass]="{'form-input-error': !controls.password.valid && controls.password.touched}"
+                        (focusout)="onPasswordFocousOut(authForm)"
+                        (keyup)="onPasswordKeyDown(authForm)"
+                        #PasswordInput
+                        >
+                        <label for="password" class="form-label" [ngClass]="{'keep-label-up': !!passwordInput.nativeElement.value}">
+                            <span class="form-label-content">Password</span>
+                        </label>
+                    </div>
+                    <p *ngIf="controls.password.touched && !controls.password.valid"class="sign-in-error-msg">{{ controls.password.errorMsg }}</p>
+        
+                    <div>
+                        <button 
+                        type="submit" 
+                        class="Sign-in-btn"
+                        >
+                        {{ isLoginMode ? 'Sign In' : 'Sign Up'}} 
+                    </button> 
+                        <!-- <button (click)="onSwitchMode()" type="button">Switch to {{ isLoginMode ? 'Sign Up' : 'Sign In'}}</button> -->
+                    </div>
+                    <!-- <fa-icon [icon]="faFacebookSquare" class="facebook-icon"></fa-icon> -->
+                    <div class="form-bottom">
+                        <a class="login-with-facebook-link" (click)="loginWithFacebook()">
+                            <img src="./../../../assets/facebook.png" class="facebook-icon" alt="">
+                            <p class="form-paragraph">Login with Facebook</p>
+                        </a>
+                        <p class="new-to-netflix">New to Netflix? <a routerLink=''>Sign up now</a>.</p>
+                        <p class="form-paragraph">This page is not protected by Google reCAPTCHA to ensure you're not a bot. <span (click)="showGoogleMsg = !showGoogleMsg" *ngIf="!showGoogleMsg">Learn more.</span></p>
+                        <p [ngClass]="{'show': showGoogleMsg}" class="form-paragraph google-msg">The information collected by Google reCAPTCHA is subject to the Google <a href="https://policies.google.com/privacy" target="_blank">Privacy Policy</a>  and <a href="https://policies.google.com/terms" target="_blank">Terms of Service</a>, and is used for providing, maintaining, and improving the reCAPTCHA service and for general security purposes (it is not used for personalized advertising by Google).</p>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     
-    <div class="sign-in-background">        
-        <form class="sign-in-form" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
-            <h3>Sign In</h3>
-            <div class="sign-in-error" *ngIf="!!error">
-                <p>{{error.msg}}</p>
-            </div>
-            <div class="form-group" [ngClass]="{'no-margin': controls.email.touched && !controls.email.valid}">
-                <input 
-                type="email" 
-                id="email"
-                ngModel
-                required
-                email
-                name="email"
-                class="sign-in-input"
-                [ngClass]="{'form-input-error': !controls.email.valid && controls.email.touched}"
-                (focusout)="onEmailFocousOut(authForm)"
-                (keyup)="onEmailKeyDown(authForm)"
-                #EmailInput
-                >
-                <label for="email" class="form-label" [ngClass]="{'keep-label-up': !!emailInput.nativeElement.value}">
-                    <span class="form-label-content">Email</span>
-                </label>
-            </div>
-            <p *ngIf="controls.email.touched && !controls.email.valid" class="sign-in-error-msg">{{ controls.email.errorMsg }}</p>
-
-            <div class="form-group" style="margin-bottom: 0;">
-                <input 
-                type="password"
-                id="password"
-                ngModel
-                name="password"
-                class="form-control"
-                required 
-                minlength="6"    
-                class="sign-in-input"
-                [ngClass]="{'form-input-error': !controls.password.valid && controls.password.touched}"
-                (focusout)="onPasswordFocousOut(authForm)"
-                (keyup)="onPasswordKeyDown(authForm)"
-                #PasswordInput
-                >
-                <label for="password" class="form-label" [ngClass]="{'keep-label-up': !!passwordInput.nativeElement.value}">
-                    <span class="form-label-content">Password</span>
-                </label>
-            </div>
-            <p *ngIf="controls.password.touched && !controls.password.valid"class="sign-in-error-msg">{{ controls.password.errorMsg }}</p>
-
-            <div>
-                <button 
-                type="submit" 
-                class="Sign-in-btn"
-                >
-                {{ isLoginMode ? 'Sign In' : 'Sign Up'}} 
-            </button> 
-                <!-- <button (click)="onSwitchMode()" type="button">Switch to {{ isLoginMode ? 'Sign Up' : 'Sign In'}}</button> -->
-            </div>
-            <!-- <fa-icon [icon]="faFacebookSquare" class="facebook-icon"></fa-icon> -->
-            <div class="form-bottom">
-                <a class="login-with-facebook-link" (click)="loginWithFacebook()">
-                    <img src="./../../../assets/facebook.png" class="facebook-icon" alt="">
-                    <p class="form-paragraph">Login with Facebook</p>
-                </a>
-                <p class="new-to-netflix">New to Netflix? <a routerLink=''>Sign up now</a>.</p>
-                <p class="form-paragraph">This page is not protected by Google reCAPTCHA to ensure you're not a bot. <span (click)="showGoogleMsg = !showGoogleMsg" *ngIf="!showGoogleMsg">Learn more.</span></p>
-                <p [ngClass]="{'show': showGoogleMsg}" class="form-paragraph google-msg">The information collected by Google reCAPTCHA is subject to the Google <a href="https://policies.google.com/privacy" target="_blank">Privacy Policy</a>  and <a href="https://policies.google.com/terms" target="_blank">Terms of Service</a>, and is used for providing, maintaining, and improving the reCAPTCHA service and for general security purposes (it is not used for personalized advertising by Google).</p>
-            </div>
-        </form>
-    </div>
 
     <div class="sign-in-bottom">
         <div class="sign-in-bottom-wrapper">
@@ -90,10 +92,11 @@
             </div>
             <div class="info-bottom">
                 <div class="languages">
-                    <fa-icon [icon]="faGlobe"></fa-icon>
+                    <span class="globe"><fa-icon [icon]="faGlobe"></fa-icon></span>
                     <select name="languages">
                         <option value="English">English</option>
                     </select>
+                    <span class="select-arrow"></span>
                 </div>
             </div>
         </div>

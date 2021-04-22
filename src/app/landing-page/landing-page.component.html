@@ -3,21 +3,22 @@
     
     <div class="landing">
         <div class="landing-top">
-            <div class="landing-background"></div>
-            <div class="landing-background-overlay">
+            <!-- <div class="landing-background"></div> -->
+            <!-- <div class="landing-background-overlay"> -->
                 <div class="landing-top">
                     <img src="./../../assets/01_Netflix_Logo/01_Netflix_Logo_RGB/Netflix_Logo_RGB.png" alt="" class="logo-img">
                     <div class="landing-top-right">
                         <div class="languages">
-                            <fa-icon [icon]="faGlobe"></fa-icon>
+                            <span class="globe"><fa-icon [icon]="faGlobe"></fa-icon></span>
                             <select name="languages">
                                 <option value="English">English</option>
                             </select>
+                            <span class="select-arrow"></span>
                         </div>
                         <a routerLink="/login" class="btn sign-in">Sign In</a> 
                     </div>
-                </div>
-            </div>
+                <!-- </div> -->
+            <!-- </div> -->
     </div>
 </div>
 
