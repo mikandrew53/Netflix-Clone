@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faGlobe } from '@fortawesome/free-solid-svg-icons';
-
+import { faGlobe, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
@@ -9,6 +8,7 @@ import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 export class LandingPageComponent implements OnInit {
   constructor() { }
   faGlobe = faGlobe
+  faChevronRight = faChevronRight;
   ngOnInit(): void {
   }
 

@@ -48,7 +48,59 @@ form {
 }
 
 .landing {
-    height: 70vh;
+    height: 72vh;
+    width: 100%;
+    position: absolute;
+    background: url('./assets/CA-en-20210322-popsignuptwoweeks-perspective_alpha_website_large.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &::after{
+        content: '';
+        height: 100%;
+        width: 100vw;
+        position: absolute;
+        top: 0;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 1;
+    }
+}
+
+.landing-netflix-description{
+    margin-top: 72vh;
+    background-color: #000000;
+}
+
+.description-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 70px 45px;
+    width: 100%;
+    border-top: 8px solid #222;
+    .conetnt-description{
+        width: 500px;
+        h1 {
+            font-size: 3.125rem;
+            margin-bottom: 0.5rem;
+            margin-right: 0;
+            line-height: 1.1;
+        }
+        h2 {
+            font-size: 1.625rem;
+            margin: .75em 0 .25em;
+            font-weight: 300;
+    
+        }
+    }
+}
+
+.item-wrapper{
+
 }
 
 .btn {
@@ -62,16 +114,75 @@ form {
 .landing-top {
     display: flex;
     justify-content: space-between;
-    .landing-background{
-        height: 72vh;
-    }
-
+    position: absolute;
+    top: 0;
+    width: 100%;
     .btn{
         margin-left: 35px;
         padding: 7px 17px;
         font-weight: 400;
         font-size: 1rem;
     }
+}
+
+.landing-msg {
+    color: #fff;
+    z-index: 3;
+    text-align: center;
+    h1 {
+        font-size: 3.125rem;
+        max-width: 640px;
+    }   
+    h2 {
+        font-size: 1.625rem;
+        font-weight: 350;
+        margin: 1rem auto;
+    }
+    h3 {
+        font-size: 1.2rem;
+        font-weight: 300;
+        padding-bottom: 20px;
+    }
+}
+
+.email-landing {
+    display: flex;
+    .arrow-right{
+        font-size: 20px;
+        margin-left: 5px;
+    }
+    .sign-in-input {
+        height: 60px;
+        background-color: #fff;
+        width: 70%;
+        border-radius: 2px;
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+        border: 1px solid #8c8c8c;
+    }
+    .form-label-content {
+        bottom: 20px;
+    }
+    .btn{
+        width: 30%;
+        border-radius: 2px;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        margin-left: 1px;
+        height: 60px;
+        a {
+            font-size: 1.5rem;
+        }
+        &:hover {
+            cursor: pointer;
+            background-color: #F32315;
+        }
+        &:active{
+            background-color: #CA1B03;
+            outline: #911100 solid 2px;
+        }
+    }
+
 }
 
 .languages{
@@ -84,17 +195,11 @@ form {
         border: 1px solid #838384;
         border-radius: 2px;
         margin: 0;
-        // margin-left: 10px;
-        // margin-right: 20px ;
         padding: 10px 30px;
         font-size: 0.8rem;
         width: 100%;
         appearance: none;
-        // background-color: #000101;
         background-color: rgba($color: #0f0d10, $alpha: 0.8);
-        span {
-            // color: rgb(255, 0, 0);
-        } 
     }
     .globe{
         position: absolute;
@@ -134,6 +239,7 @@ form {
     display: flex;
     align-items: center;
     margin-right: 3%;
+    z-index: 2;
     // max-width: 100%;
 }
 
@@ -144,34 +250,10 @@ form {
     width: 210px;
     height: 89px;
     margin-left: 2%;
+    z-index: 2;
 }
 
-.landing-background {
-    // min-height: 100vh;
-    // max-height: 110vh;
-    height: 110vh;
-    width: 100%;
-    position: absolute;
-    background: url('./assets/CA-en-20210322-popsignuptwoweeks-perspective_alpha_website_large.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    &::after{
-        content: '';
-        height: 110vh;
-        // min-height: 100vh;
-        // max-height: 110vh;
-        width: 100vw;
-        position: absolute;
-        background-color: rgba(0,0,0,0.4);
-    }
-}
 
-.landing-background-overlay{
-    // height: 100vh;
-    // width: 100vw;
-    // position: absolute;
-    // background-color: rgba(0,0,0,0.4);
-}
 
 
 // sign in page
@@ -194,7 +276,7 @@ form {
         // max-height: 110vh;
         width: 100vw;
         position: absolute;
-        background-color: rgba(0,0,0,0.4);
+        background-color: rgba(0,0,0,0.5);
         z-index: 1;
     }
 }
