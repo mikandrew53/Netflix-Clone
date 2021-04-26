@@ -145,6 +145,11 @@ form {
     
         }
     }
+
+    .sign-in-bottom{
+        margin: 0;
+        border-top: none;
+    }
 }
 .email-landing-wrapper{
     display: flex;
@@ -428,6 +433,22 @@ form {
 
 .faq-section{
     flex-direction: column;
+    h3{
+        text-align: center;
+    }
+
+    .email-landing-wrapper{
+        max-width: 815px;
+
+    }
+
+}
+
+.ready-to-watch{
+    margin-top: 50px;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    text-align: center;
 }
 
 .faq-header{
@@ -438,32 +459,35 @@ form {
 
 
 .questions {
-    margin-right: 250px;
-    margin-left: 250px;
+    max-width: 815px;
 }
 
 .accordian{
     background: #303030;
     color: #FFF;
     cursor: pointer;
-    // padding: 18px;
-    padding: .8em 2.2em .8em 1.2em;
+    padding: 18px;
+    // padding: .8em 2.2em .8em 1.2em;
     width: 100%;
     text-align: left;
     transition: 0.4s;
     outline: none;
     border: none;
-    margin-bottom: 8px;
-    font-size: 2rem;
+    margin-top: 8px;
+    font-size: 1.5rem;
 }
 
 .panel {
-    padding: 0 18px;
     background: #303030;
     /* display: none; */
     overflow: hidden;
     max-height: 0;
-    transition: max-height 0.2s ease-out;
+    transition: max-height 150ms ease-out;
+    margin-top: 1px;
+    p{
+        padding: 1.2em;
+        font-size: 1.4rem;
+    }
 }
 
 .accordian:after {
@@ -472,8 +496,8 @@ form {
     float: right;
     margin-left: 5px;
 }
-.active:after {
-    content: '\2796';
+.active-accordian {
+    // margin-bottom: 1px;
 }
 
 
@@ -733,6 +757,16 @@ form {
     .description-item{
         flex-direction: column;
     }
+    .accordian{
+        height: 57px;
+        font-size: 1.3rem;
+        font-weight: 300;
+    }
+    .panel {
+        p{
+            font-size: 1.2rem;
+        }
+    }
 
     .download {
         .content-gif {
@@ -779,6 +813,11 @@ form {
         }
     }
 
+    .faq-section{
+        h3{
+            text-align: center;
+        }
+    }
 
     .sign-in-page-overlay {
         background-color: #000;
@@ -836,12 +875,25 @@ form {
             margin-left: 2%;
             z-index: 2;
         }
-    
+    }
+
+    .description-item{
+        .sign-in-bottom{
+            .info-middle{
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
     }
 }
 
 
 @media (max-width: 550px) {
+
+    .faq-section{
+        padding-left: 0;
+        padding-right: 0;
+    }    
+
     .download-gif{
         .boxshot{
             height: 4em;
@@ -879,6 +931,14 @@ form {
 }
 
 @media (max-width: 500px){
+
+    .description-item{
+        .sign-in-bottom{
+            .info-middle{
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    }
     .info-middle{
         grid-template-columns: repeat(2, 1fr);
     }

@@ -86,17 +86,67 @@
         <li class="description-item faq-section">
             <h3 class="faq-header">Frequently Asked Questions</h3>
             <div class="questions">
-                <button class="accordian">Section 1</button>
-                <div class="panel">
-                    <p>1 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni facilis eum deleniti, nisi possimus iure in? Fugit, iusto fuga, laboriosam nemo odit eius a ipsam, sint inventore cum nam labore.</p>
+               <div *ngFor="let question of faq; let i = index">
+                   <button class="accordian" [ngClass]="{'active-accordian': question.active}" id="accordian-{{i}}" (click)="onAccordianClick(i)">{{question.question}} </button> 
+                    <div class="panel" id="panel-{{i}}" >
+                        <p *ngFor="let answer of question.answer">{{answer}}</p>
+                    </div>
+               </div> 
+            </div>
+            <p class="ready-to-watch">Ready to watch? Enter your email to create or restart your membership.</p>
+            <div class="email-landing-wrapper">
+                <div class="form-group email-landing" >
+                    <input 
+                    type="email" 
+                    id="email"
+                    ngModel
+                    required
+                    email
+                    name="email"
+                    class="sign-in-input"
+                    #EmailInput
+                    >
+                    <label for="email" class="form-label">
+                        <span class="form-label-content">Email address</span>
+                    </label>
                 </div>
-                <button class="accordian">Section 2</button>
-                <div class="panel">
-                    <p>2 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni facilis eum deleniti, nisi possimus iure in? Fugit, iusto fuga, laboriosam nemo odit eius a ipsam, sint inventore cum nam labore.</p>
-                </div>
-                <button class="accordian">Section 3</button>
-                <div class="panel">
-                    <p>3 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni facilis eum deleniti, nisi possimus iure in? Fugit, iusto fuga, laboriosam nemo odit eius a ipsam, sint inventore cum nam labore.</p>
+                <button class="btn"><a href="">Get Started <fa-icon class="arrow-right" [icon]="faChevronRight"></fa-icon> </a></button>
+            </div>
+        </li>
+        <li class="description-item">
+            <div class="sign-in-bottom">
+                <div class="sign-in-bottom-wrapper">
+                    <div class="info-top">
+                        <p class="">Question? Call <a href="tel:1-844-542-4813">1-844-542-4813</a></p> 
+                    </div>
+                    <div class="info-middle">
+                        <a href="">FAQ</a>
+                        <a href="">Help Center</a>
+                        <a href="">Account</a>
+                        <a href="">Media Center</a>
+                        <a href="">Investor Relations</a>
+                        <a href="">Jobs</a>
+                        <a href="">Redeem Gift Cards</a>
+                        <a href="">Buy Gift Cards</a>
+                        <a href="">Ways to Watch</a>
+                        <a href="">Terms of Use</a>
+                        <a href="">Privacy</a>
+                        <a href="">Cookie Preferences</a>
+                        <a href="">Contact Us</a>
+                        <a href="">Speed Test</a>
+                        <a href="">Legal Notices</a>
+                        <a href="">NoticesNetflix Originals
+                        </a>
+                    </div>
+                    <div class="info-bottom">
+                        <div class="languages">
+                            <span class="globe"><fa-icon [icon]="faGlobe"></fa-icon></span>
+                            <select name="languages">
+                                <option value="English">English</option>
+                            </select>
+                            <span class="select-arrow"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </li>
