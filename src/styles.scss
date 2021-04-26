@@ -4,6 +4,8 @@ $background-color: #141414;
 $error: #e87c03;
 $netflix-red: #e50914; 
 
+$landing-height: 70vh;
+
 
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
@@ -51,9 +53,9 @@ form {
 
 // ------------------------------------------------ Landing
 .landing {
-    height:65vh;
+    height: $landing-height;
     width: 100%;
-    position: absolute;
+    position: relative;
     background: url('./assets/CA-en-20210322-popsignuptwoweeks-perspective_alpha_website_large.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -62,6 +64,9 @@ form {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     &::after{
         content: '';
         height: 100%;
@@ -73,8 +78,48 @@ form {
     }
 }
 
+.landing-top {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    .btn{
+        margin-left: 35px;
+        padding: 7px 17px;
+        font-weight: 400;
+        font-size: 1rem;
+    }
+}
+
+.landing-msg {
+    color: #fff;
+    z-index: 3;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 20px;
+    // position: absolute;
+    // top: 125px;
+    h1 {
+        font-size: 3.125rem;
+        max-width: 640px;
+    }   
+    h2 {
+        font-size: 1.625rem;
+        font-weight: 350;
+        margin: 1rem auto;
+    }
+    h3 {
+        font-size: 1.2rem;
+        font-weight: 300;
+        padding-bottom: 20px;
+    }
+}
+
 .landing-netflix-description{
-    margin-top: 65vh;
     background-color: #000000;
 }
 
@@ -100,6 +145,129 @@ form {
     
         }
     }
+}
+.email-landing-wrapper{
+    display: flex;
+    width: 100%;
+    .btn{
+        width: 30%;
+        border-radius: 2px;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        margin-left: 1px;
+        height: 60px;
+        display: flex;
+        align-self: center;
+        justify-content: center;
+        align-items: center;
+        a {
+            font-size: 1.5rem;
+        }
+        &:hover {
+            cursor: pointer;
+            background-color: #F32315;
+        }
+        &:active{
+            background-color: #CA1B03;
+            outline: #911100 solid 2px;
+        }
+    }
+}
+
+.email-landing {
+    display: flex;
+    width: 90%;
+    margin-bottom: 0 !important;
+    height: 60px;
+    input{
+        color: #000;
+    }
+    .arrow-right{
+        font-size: 20px;
+        margin-left: 5px;
+    }
+    .sign-in-input {
+        height: 100%;
+        background-color: #fff;
+        width: 100%;
+        border-radius: 2px;
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+        border: 1px solid #8c8c8c;
+    }
+    .form-label-content {
+        bottom: 20px;
+    }
+   
+
+}
+
+.languages{
+    position: relative;
+    select{
+        background-color: transparent ;
+        height: 40px;
+        color: #ffffff;
+        outline: none;
+        border: 1px solid #838384;
+        border-radius: 2px;
+        margin: 0;
+        padding: 10px 30px;
+        font-size: 0.8rem;
+        width: 100%;
+        appearance: none;
+        background-color: rgba($color: #0f0d10, $alpha: 0.8);
+    }
+    .globe{
+        position: absolute;
+        left: 6px;
+        top: 11px;
+        transform: scale(0.75);
+        // padding-right: 10px;
+        pointer-events: none;
+    }
+    .select-arrow{
+        display: block;
+        // width: 1rem;
+        // height: 1rem ;
+        position: absolute;
+        top: 1px;
+        right: 0px;
+        // height: 100%;
+        // margin: auto;
+        width: 20px;
+        pointer-events: none;
+        border-radius: 2px;
+        &::before{
+            content: '';
+            position: absolute ;
+            width: 0;
+            height: 0 ;
+            // left: -3px;
+            top: 16px;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #ffffff; 
+        }
+    }
+ }
+
+.landing-top-right{
+    display: flex;
+    align-items: center;
+    margin-right: 3%;
+    z-index: 2;
+    // max-width: 100%;
+}
+
+.logo:hover {
+    cursor: default;
+}
+.logo-img {
+    width: 210px;
+    height: 89px;
+    margin-left: 2%;
+    z-index: 2;
 }
 
 .content-gif{
@@ -258,146 +426,54 @@ form {
     padding: 15px 0;
 }
 
-.landing-top {
-    display: flex;
-    justify-content: space-between;
-    position: absolute;
-    top: 0;
+.faq-section{
+    flex-direction: column;
+}
+
+.faq-header{
+    font-size: 3rem;
+    margin-bottom: 50px;
+}
+
+
+
+.questions {
+    margin-right: 250px;
+    margin-left: 250px;
+}
+
+.accordian{
+    background: #303030;
+    color: #FFF;
+    cursor: pointer;
+    // padding: 18px;
+    padding: .8em 2.2em .8em 1.2em;
     width: 100%;
-    .btn{
-        margin-left: 35px;
-        padding: 7px 17px;
-        font-weight: 400;
-        font-size: 1rem;
-    }
+    text-align: left;
+    transition: 0.4s;
+    outline: none;
+    border: none;
+    margin-bottom: 8px;
+    font-size: 2rem;
 }
 
-.landing-msg {
-    color: #fff;
-    z-index: 3;
-    text-align: center;
-    h1 {
-        font-size: 3.125rem;
-        max-width: 640px;
-    }   
-    h2 {
-        font-size: 1.625rem;
-        font-weight: 350;
-        margin: 1rem auto;
-    }
-    h3 {
-        font-size: 1.2rem;
-        font-weight: 300;
-        padding-bottom: 20px;
-    }
+.panel {
+    padding: 0 18px;
+    background: #303030;
+    /* display: none; */
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
 }
 
-.email-landing {
-    display: flex;
-    .arrow-right{
-        font-size: 20px;
-        margin-left: 5px;
-    }
-    .sign-in-input {
-        height: 60px;
-        background-color: #fff;
-        width: 70%;
-        border-radius: 2px;
-        border-bottom-right-radius: 0;
-        border-top-right-radius: 0;
-        border: 1px solid #8c8c8c;
-    }
-    .form-label-content {
-        bottom: 20px;
-    }
-    .btn{
-        width: 30%;
-        border-radius: 2px;
-        border-bottom-left-radius: 0;
-        border-top-left-radius: 0;
-        margin-left: 1px;
-        height: 60px;
-        a {
-            font-size: 1.5rem;
-        }
-        &:hover {
-            cursor: pointer;
-            background-color: #F32315;
-        }
-        &:active{
-            background-color: #CA1B03;
-            outline: #911100 solid 2px;
-        }
-    }
-
+.accordian:after {
+    content: '\02795';
+    font-size: 15px;
+    float: right;
+    margin-left: 5px;
 }
-
-.languages{
-    position: relative;
-    select{
-        background-color: transparent ;
-        height: 40px;
-        color: #ffffff;
-        outline: none;
-        border: 1px solid #838384;
-        border-radius: 2px;
-        margin: 0;
-        padding: 10px 30px;
-        font-size: 0.8rem;
-        width: 100%;
-        appearance: none;
-        background-color: rgba($color: #0f0d10, $alpha: 0.8);
-    }
-    .globe{
-        position: absolute;
-        left: 6px;
-        top: 11px;
-        transform: scale(0.75);
-        // padding-right: 10px;
-        pointer-events: none;
-    }
-    .select-arrow{
-        display: block;
-        // width: 1rem;
-        // height: 1rem ;
-        position: absolute;
-        top: 1px;
-        right: 0px;
-        // height: 100%;
-        // margin: auto;
-        width: 20px;
-        pointer-events: none;
-        border-radius: 2px;
-        &::before{
-            content: '';
-            position: absolute ;
-            width: 0;
-            height: 0 ;
-            // left: -3px;
-            top: 16px;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-top: 5px solid #ffffff; 
-        }
-    }
- }
-
-.landing-top-right{
-    display: flex;
-    align-items: center;
-    margin-right: 3%;
-    z-index: 2;
-    // max-width: 100%;
-}
-
-.logo:hover {
-    cursor: default;
-}
-.logo-img {
-    width: 210px;
-    height: 89px;
-    margin-left: 2%;
-    z-index: 2;
+.active:after {
+    content: '\2796';
 }
 
 
@@ -654,7 +730,6 @@ form {
 }
 
 @media (max-width: 950px) {
-
     .description-item{
         flex-direction: column;
     }
@@ -667,10 +742,44 @@ form {
             order: 1;
         }
     }
+    .email-landing-wrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .btn {
+            height: 40px;
+            margin-top: 20px;
+            width: fit-content;
+            margin-left: 0;
+            border-radius: 2px;
+            padding: 0 15px;
+            a {
+                font-size: 1rem;
+            }
+        }
+    }
 }
 
 
+
 @media (max-width: 780px){
+
+    .landing-msg {
+        .landing-msg-content{
+            max-width: 70%;
+        }
+        h1 {
+            font-size: 2.1875rem;
+        }   
+        h2 {
+            font-size: 1.325rem;
+        }
+        h3 {
+            font-size: 1.2rem;
+        }
+    }
+
+
     .sign-in-page-overlay {
         background-color: #000;
     }
@@ -695,6 +804,7 @@ form {
     .google-msg {
         padding-bottom: 40px;
     }
+    
 
     .description-item{
         .conetnt-description{
@@ -715,6 +825,21 @@ form {
     }
 }
 
+@media (max-width: 700px) {
+    .email-landing {
+        height: 48px;
+        .form-label-content {
+            bottom: 15px;
+        }
+        .logo-img {
+            height: auto;
+            margin-left: 2%;
+            z-index: 2;
+        }
+    
+    }
+}
+
 
 @media (max-width: 550px) {
     .download-gif{
@@ -722,6 +847,35 @@ form {
             height: 4em;
         }
     }
+
+    .languages{
+        position: relative;
+        select{
+            height: 28px;
+            padding-top: 1px;
+            padding-bottom: 1px;
+            font-size: 0.8rem;
+        }
+        .globe{
+            top: 5px;
+        }
+        .select-arrow{
+            &::before{
+                top: 11px;
+            }
+        }
+     }
+
+     .landing-top {
+         .sign-in {
+            margin-left: 0.75rem;
+            height: 27px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+
+        }
+     }
 }
 
 @media (max-width: 500px){
@@ -731,11 +885,62 @@ form {
 
     .logo-img {
         width: 110px;
+        height: 56.19px;
         padding-top: 10px;
+    }
+}
+
+@media (max-width: 475px){
+
+    .landing-msg {
+        .landing-msg-content{
+            
+        }
+        h1 {
+            font-size: 1.7rem;
+        }   
+        h2 {
+            font-size: 1.2rem;
+        }
+        h3 {
+            font-size: 1.2rem;
+        }
     }
 }
 @media (max-width: 250px){
     .info-middle{
         grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+
+
+@media (max-height: 700px) {
+    .landing {
+        height: 500px;
+        width: 100%;
+        position: absolute;
+        background: url('./assets/CA-en-20210322-popsignuptwoweeks-perspective_alpha_website_large.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        &::after{
+            content: '';
+            height: 100%;
+            width: 100vw;
+            position: absolute;
+            top: 0;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1;
+        }
+    }
+    
+    .landing-netflix-description{
+        margin-top: 500px;
+        background-color: #000000;
     }
 }
