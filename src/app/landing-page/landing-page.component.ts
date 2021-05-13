@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { faGlobe, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 interface faqQuestion {
@@ -13,9 +13,11 @@ interface faqQuestion {
 })
 export class LandingPageComponent implements OnInit {
   constructor() { }
+  @ViewChild('video1', {static: true}) video1: ElementRef;
+  @ViewChild('video2', {static: true}) video2: ElementRef;
   faGlobe = faGlobe
   faChevronRight = faChevronRight;
-
+  
   faq: Array<faqQuestion>
   ngOnInit(): void {
     this.faq = [
@@ -57,6 +59,13 @@ export class LandingPageComponent implements OnInit {
         active: false
       },
     ]
+  }
+
+  ngAfterViewInit(): void {
+    this.video2.nativeElement.muted = true;
+    this.video2.nativeElement.play();
+    this.video1.nativeElement.muted = true;
+    this.video1.nativeElement.play();
   }
 
   onAccordianClick(index:number){
