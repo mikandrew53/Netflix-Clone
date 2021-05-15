@@ -107,6 +107,7 @@ form {
     h1 {
         font-size: 3.125rem;
         max-width: 640px;
+        line-height: 1;
     }   
     h2 {
         font-size: 1.625rem;
@@ -160,6 +161,7 @@ form {
 }
 .email-landing-wrapper{
     display: flex;
+    // flex-wrap: wrap;
     width: 100%;
     .btn{
         width: 30%;
@@ -184,6 +186,21 @@ form {
             outline: #911100 solid 2px;
         }
     }
+    .mobile-error-msg{
+        margin-top: 5px;
+    }
+    
+    .landing-error-msg {
+        align-self: flex-start;
+        margin-left: 6%;
+        color: #ffa00a;
+    }
+}
+.landing-error-msg {
+    align-self: flex-start;
+    margin-left: 5%;
+    margin-top: 10px;
+    color: #ffa00a;
 }
 
 .email-landing {
@@ -191,14 +208,12 @@ form {
     width: 90%;
     margin-bottom: 0 !important;
     height: 60px;
-    input{
-        color: #000;
-    }
     .arrow-right{
         font-size: 20px;
         margin-left: 5px;
     }
     .sign-in-input {
+        color: #000;
         height: 100%;
         background-color: #fff;
         width: 100%;
@@ -209,6 +224,10 @@ form {
     }
     .form-label-content {
         bottom: 20px;
+    }
+
+    .form-input-error {
+        border-bottom: 2px solid #ffa00a ;
     }
    
 
@@ -314,6 +333,10 @@ form {
         max-width: 100%;
         height: auto;
     }
+}
+
+.margin-top{
+    margin-top: 10px;
 }
 
 .devices {
@@ -444,8 +467,12 @@ form {
         text-align: center;
     }
 
-    .email-landing-wrapper{
-        max-width: 815px;
+    .email-landing-wrapper-bottom{
+        max-width: 750px;
+        width: 100%;
+        .email-landing-wrapper{
+            width: 100%;
+        }
 
     }
 
@@ -467,7 +494,10 @@ form {
 
 .questions {
     max-width: 815px;
+    margin-bottom: 71px;
 }
+
+
 
 .accordian{
     background: #303030;
@@ -609,7 +639,7 @@ form {
 }
 
 .form-input-error{
-    border-bottom: 2px solid $error;
+    border-bottom: 2px solid $error ;
 }
 
 .keep-label-up{
@@ -803,7 +833,8 @@ form {
         align-items: center;
         .btn {
             height: 40px;
-            margin-top: 20px;
+            // margin-top: 20px;
+            border-radius: 4px;
             width: fit-content;
             margin-left: 0;
             border-radius: 2px;
@@ -812,17 +843,27 @@ form {
                 font-size: 1rem;
             }
         }
+
+        .sign-in-input {
+            border-radius: 4px;
+        }
     }
 }
+
 
 .proggress-spinner {
     // color: #fff;
 }
 .mat-progress-spinner circle, .mat-spinner circle {
     stroke: #c9b7b6;
+    stroke: #86807E;
     // stroke: #fff;
     
     }
+
+.btn-loading-dark {
+    background-color: #781111;
+}
 
 
 

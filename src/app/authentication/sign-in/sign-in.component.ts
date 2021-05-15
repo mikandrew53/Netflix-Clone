@@ -72,7 +72,10 @@ constructor(private authService:AuthService, private router: Router) { }
         if(this.isAuthenticated)
           this.router.navigate(['browse']);
       },
-      error => this.handleServerError(error, form)
+      error => {
+        this.handleServerError(error, form)
+        this.loading = false;
+      }
     );
   }
 

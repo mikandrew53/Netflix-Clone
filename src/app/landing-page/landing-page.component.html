@@ -18,24 +18,28 @@
             <h2>Watch anywhere. Cancel anytime.</h2>
             <h3>Ready to watch? Enter your email to create or restart your membership.</h3>
         </div>
-        <div class="email-landing-wrapper">
+        <div class="email-landing-wrapper" >
             <div class="form-group email-landing" >
                 <input 
                 type="email" 
-                id="email"
                 ngModel
                 required
                 email
                 name="email"
                 class="sign-in-input"
-                #EmailInput
+                #emailInputTop
+                [ngClass]="{'form-input-error': topInputElementEntered && !topInputElementValid}"
+                (keyup)="inputTopKeyDown($event)"
+                (focusout)="onInputTopFocusOut()"
                 >
-                <label for="email" class="form-label">
+                <label for="email" class="form-label" [ngClass]="{'keep-label-up': !!emailTop.nativeElement.value}">
                     <span class="form-label-content">Email address</span>
                 </label>
             </div>
-            <button class="btn"><a href="">Get Started <fa-icon class="arrow-right" [icon]="faChevronRight"></fa-icon> </a></button>
+            <p *ngIf="mobile && topInputElementEntered && !topInputElementValid" class="landing-error-msg mobile-error-msg">{{errorMsg}}</p>
+            <button class="btn" [ngClass]="{'margin-top': mobile && (!topInputElementEntered || !topInputElementValid)}" ><a href="">Get Started <fa-icon class="arrow-right" [icon]="faChevronRight"></fa-icon> </a></button>
         </div>
+        <p *ngIf="!mobile && topInputElementEntered && !topInputElementValid" class="landing-error-msg" style="margin: 7px 0px 0px 7px">{{errorMsg}}</p>
     </div>
 </div>
 
@@ -92,25 +96,31 @@
                </div> 
             </div>
             <p class="ready-to-watch">Ready to watch? Enter your email to create or restart your membership.</p>
-            <div class="email-landing-wrapper">
-                <div class="form-group email-landing" >
-                    <input 
-                    type="email" 
-                    id="email"
-                    ngModel
-                    required
-                    email
-                    name="email"
-                    class="sign-in-input"
-                    #EmailInput
-                    >
-                    <label for="email" class="form-label">
-                        <span class="form-label-content">Email address</span>
-                    </label>
+            <div class="email-landing-wrapper-bottom">
+                <div class="email-landing-wrapper">
+                    <div class="form-group email-landing" >
+                        <input 
+                        type="email" 
+                        ngModel
+                        required
+                        email
+                        name="email"
+                        class="sign-in-input"
+                        #emailInputBottom
+                        (keyup)="inputBottomKeyDown($event)"
+                        (focusout)="onInputBottomFocusOut()"
+                        [ngClass]="{'form-input-error': bottomInputElementEntered && !bottomInputElementEnteredValid}"
+                        >
+                        <label for="email" class="form-label" [ngClass]="{'keep-label-up': !!emailBottom.nativeElement.value}">
+                            <span class="form-label-content">Email address</span>
+                        </label>
+                    </div>
+                    <p *ngIf="mobile && bottomInputElementEntered && !bottomInputElementEnteredValid" class="landing-error-msg mobile-error-msg">{{errorMsg}}</p>
+                    <button class="btn" [ngClass]="{'margin-top': mobile}"><a href="">Get Started <fa-icon class="arrow-right" [icon]="faChevronRight"></fa-icon> </a></button>
                 </div>
-                <button class="btn"><a href="">Get Started <fa-icon class="arrow-right" [icon]="faChevronRight"></fa-icon> </a></button>
+                <p *ngIf="!mobile && bottomInputElementEntered && !bottomInputElementEnteredValid" class="landing-error-msg" style="margin: 7px 0px 0px 7px">{{errorMsg}}</p>
             </div>
-        </li>
+            </li>
         <li class="description-item">
             <div class="sign-in-bottom">
                 <div class="sign-in-bottom-wrapper">

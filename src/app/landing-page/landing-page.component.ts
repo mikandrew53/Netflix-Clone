@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { faGlobe, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 interface faqQuestion {
@@ -12,14 +12,30 @@ interface faqQuestion {
   styleUrls: ['./landing-page.component.scss']
 })
 export class LandingPageComponent implements OnInit {
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+    this.innerWidth < 951 ? this.mobile = true : this.mobile = false;
+  }
   constructor() { }
   @ViewChild('video1', {static: true}) video1: ElementRef;
   @ViewChild('video2', {static: true}) video2: ElementRef;
+  @ViewChild('emailInputTop', {static: true}) emailTop: ElementRef;
+  @ViewChild('emailInputBottom', {static: true}) emailBottom: ElementRef;
   faGlobe = faGlobe
   faChevronRight = faChevronRight;
+  innerWidth;
+  mobile: boolean;
+  topInputElementEntered:boolean = false;
+  topInputElementValid:boolean = false;
+  bottomInputElementEntered:boolean = false;
+  bottomInputElementEnteredValid:boolean = false;
+  errorMsg:string;
   
   faq: Array<faqQuestion>
   ngOnInit(): void {
+    this.innerWidth = window.innerWidth
+    this.innerWidth < 951 ? this.mobile = true : this.mobile = false;
     this.faq = [
       {
         question: 'What is Netflix?',
@@ -68,10 +84,46 @@ export class LandingPageComponent implements OnInit {
     this.video1.nativeElement.play();
   }
 
+  onTopSubmit() {
+    console.log(this.emailTop.nativeElement.value);
+    
+  }
+  onInputTopFocusOut(){
+    if(!this.topInputElementEntered && !!this.emailTop.nativeElement.value)
+      this.topInputElementEntered = true;
+    
+  }
+
+  inputTopKeyDown(e){
+    this.topInputElementValid = this.validateEmail(this.emailTop.nativeElement.value);
+    if(this.emailTop.nativeElement.value === '')
+      this.errorMsg = 'Email is required!'
+    else if(!this.topInputElementValid)
+      this.errorMsg = 'Please enter a valid email'
+  }
+
+  onInputBottomFocusOut(){
+    if(!this.bottomInputElementEntered && !!this.emailBottom.nativeElement.value)
+      this.bottomInputElementEntered = true;
+    
+  }
+  inputBottomKeyDown(e){
+    this.bottomInputElementEnteredValid = this.validateEmail(this.emailBottom.nativeElement.value);
+    if(this.emailBottom.nativeElement.value === '')
+      this.errorMsg = 'Email is required!'
+    else if(!this.bottomInputElementEnteredValid)
+      this.errorMsg = 'Please enter a valid email'
+  }
+
+  validateEmail(email:string) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+
   onAccordianClick(index:number){
     console.log('yo');
     
-    let accordian = document.getElementById(`accordian-${{index}}`);
+    // let accordian = document.getElementById(`accordian-${{index}}`);
     let pannel = document.getElementById('panel-'+index);
     if(this.faq[index].active)
       pannel.style.maxHeight = null;
