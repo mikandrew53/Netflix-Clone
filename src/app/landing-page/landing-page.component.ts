@@ -1,7 +1,8 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { faGlobe, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { Subject } from 'rxjs';
+import { AuthService } from '../authentication/auth.service';
+
 
 interface faqQuestion {
   question: string,
@@ -19,7 +20,8 @@ export class LandingPageComponent implements OnInit {
     this.innerWidth = window.innerWidth;
     this.innerWidth < 951 ? this.mobile = true : this.mobile = false;
   }
-  constructor(private router: Router) { }
+  constructor(private router: Router, private auth: AuthService) { }
+
   @ViewChild('video1', {static: true}) video1: ElementRef;
   @ViewChild('video2', {static: true}) video2: ElementRef;
   @ViewChild('emailInputTop', {static: true}) emailTop: ElementRef;
@@ -33,9 +35,8 @@ export class LandingPageComponent implements OnInit {
   bottomInputElementEntered:boolean = false;
   bottomInputElementEnteredValid:boolean = false;
   errorMsg:string;
-  signUpEmail = new Subject<{email:string}>();
-  
   faq: Array<faqQuestion>
+
   ngOnInit(): void {
     this.innerWidth = window.innerWidth
     this.innerWidth < 951 ? this.mobile = true : this.mobile = false;
@@ -90,14 +91,14 @@ export class LandingPageComponent implements OnInit {
   onTopSubmit() {
     if(this.topInputElementValid){
       console.log('top');
-      this.signUpEmail.next({email: this.emailTop.nativeElement.value})
+      this.auth.setSignupEmail(this.emailTop.nativeElement.value);
       this.router.navigate(['signup']);
     }  
   }
   onBottomSubmit() {
     if(this.bottomInputElementEnteredValid){
       console.log('bottom');
-      this.signUpEmail.next({email: this.emailBottom.nativeElement.value})
+      this.auth.setSignupEmail(this.emailBottom.nativeElement.value);
       this.router.navigate(['signup']);
     }  
   }

@@ -5,11 +5,15 @@ import { SignInComponent } from './authentication/sign-in/sign-in.component';
 import { SignUpComponent } from './authentication/sign-up/sign-up.component';
 import { BrowseComponent } from './browse/browse.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { SignUpGuard } from './authentication/sign-up/signup.guard';
 
 const appRoutes: Routes = [
     { path: '', component: LandingPageComponent },
     { path: 'login', component: SignInComponent },  
-    { path: 'signup', component: SignUpComponent },  
+    { path: 'signup',
+     component: SignUpComponent,
+     canActivate: [SignUpGuard]
+    },  
     { 
       path: 'browse',
       component: BrowseComponent,

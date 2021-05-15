@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap} from 'rxjs/operators';
-import { BehaviorSubject, throwError } from 'rxjs';
+import { BehaviorSubject, throwError, Subject } from 'rxjs';
 import { User } from './sign-in/user.model';
 import { Router } from '@angular/router';
 import firebase from "firebase";
@@ -31,12 +31,18 @@ export class AuthService {
   private tokenExpirationTimer: any;
   private authenticated:boolean = false;
   private TMBD_token: string;
-  
+  signUpEmail = new BehaviorSubject<string>(null);
 
   constructor(
     private http: HttpClient,
     private router: Router,
     ) { }
+
+  setSignupEmail(email:string) {
+    console.log(email);
+    
+    this.signUpEmail.next(email);
+  }  
 
   signup(email: string, password: string) {
     return this.http.post<AuthResponseData>(
