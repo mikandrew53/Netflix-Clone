@@ -2,7 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { AuthService, AuthResponseData, SignInError } from './auth.service';
+import { AuthService, AuthResponseData, SignInError } from '../auth.service';
 import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 import firebase from "firebase";
 

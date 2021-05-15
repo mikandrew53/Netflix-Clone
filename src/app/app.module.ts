@@ -16,6 +16,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { SignUpComponent } from './authentication/sign-up/sign-up.component';
 
 
 
@@ -25,7 +26,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     AppComponent,
     SignInComponent,
     LandingPageComponent,
-    BrowseComponent
+    BrowseComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,

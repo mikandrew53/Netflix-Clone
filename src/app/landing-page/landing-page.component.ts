@@ -1,5 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { faGlobe, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { Subject } from 'rxjs';
 
 interface faqQuestion {
   question: string,
@@ -17,7 +19,7 @@ export class LandingPageComponent implements OnInit {
     this.innerWidth = window.innerWidth;
     this.innerWidth < 951 ? this.mobile = true : this.mobile = false;
   }
-  constructor() { }
+  constructor(private router: Router) { }
   @ViewChild('video1', {static: true}) video1: ElementRef;
   @ViewChild('video2', {static: true}) video2: ElementRef;
   @ViewChild('emailInputTop', {static: true}) emailTop: ElementRef;
@@ -31,6 +33,7 @@ export class LandingPageComponent implements OnInit {
   bottomInputElementEntered:boolean = false;
   bottomInputElementEnteredValid:boolean = false;
   errorMsg:string;
+  signUpEmail = new Subject<{email:string}>();
   
   faq: Array<faqQuestion>
   ngOnInit(): void {
@@ -85,8 +88,18 @@ export class LandingPageComponent implements OnInit {
   }
 
   onTopSubmit() {
-    console.log(this.emailTop.nativeElement.value);
-    
+    if(this.topInputElementValid){
+      console.log('top');
+      this.signUpEmail.next({email: this.emailTop.nativeElement.value})
+      this.router.navigate(['signup']);
+    }  
+  }
+  onBottomSubmit() {
+    if(this.bottomInputElementEnteredValid){
+      console.log('bottom');
+      this.signUpEmail.next({email: this.emailBottom.nativeElement.value})
+      this.router.navigate(['signup']);
+    }  
   }
   onInputTopFocusOut(){
     if(!this.topInputElementEntered && !!this.emailTop.nativeElement.value)
@@ -95,6 +108,11 @@ export class LandingPageComponent implements OnInit {
   }
 
   inputTopKeyDown(e){
+    if(e.key === 'Enter'){
+      this.topInputElementEntered = true;
+      this.onTopSubmit();
+      return;
+    }
     this.topInputElementValid = this.validateEmail(this.emailTop.nativeElement.value);
     if(this.emailTop.nativeElement.value === '')
       this.errorMsg = 'Email is required!'
@@ -108,6 +126,11 @@ export class LandingPageComponent implements OnInit {
     
   }
   inputBottomKeyDown(e){
+    if(e.key === 'Enter'){
+      this.bottomInputElementEntered = true;
+      this.onBottomSubmit();
+      return;
+    }
     this.bottomInputElementEnteredValid = this.validateEmail(this.emailBottom.nativeElement.value);
     if(this.emailBottom.nativeElement.value === '')
       this.errorMsg = 'Email is required!'
@@ -121,9 +144,6 @@ export class LandingPageComponent implements OnInit {
   }
 
   onAccordianClick(index:number){
-    console.log('yo');
-    
-    // let accordian = document.getElementById(`accordian-${{index}}`);
     let pannel = document.getElementById('panel-'+index);
     if(this.faq[index].active)
       pannel.style.maxHeight = null;

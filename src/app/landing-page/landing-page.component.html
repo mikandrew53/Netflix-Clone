@@ -37,7 +37,7 @@
                 </label>
             </div>
             <p *ngIf="mobile && topInputElementEntered && !topInputElementValid" class="landing-error-msg mobile-error-msg">{{errorMsg}}</p>
-            <button class="btn" [ngClass]="{'margin-top': mobile && (!topInputElementEntered || !topInputElementValid)}" ><a href="">Get Started <fa-icon class="arrow-right" [icon]="faChevronRight"></fa-icon> </a></button>
+            <button (click)="onTopSubmit()" class="btn" [ngClass]="{'margin-top': mobile && (!topInputElementEntered || !topInputElementValid)}" ><a>Get Started <fa-icon class="arrow-right" [icon]="faChevronRight"></fa-icon> </a></button>
         </div>
         <p *ngIf="!mobile && topInputElementEntered && !topInputElementValid" class="landing-error-msg" style="margin: 7px 0px 0px 7px">{{errorMsg}}</p>
     </div>
@@ -116,7 +116,7 @@
                         </label>
                     </div>
                     <p *ngIf="mobile && bottomInputElementEntered && !bottomInputElementEnteredValid" class="landing-error-msg mobile-error-msg">{{errorMsg}}</p>
-                    <button class="btn" [ngClass]="{'margin-top': mobile}"><a href="">Get Started <fa-icon class="arrow-right" [icon]="faChevronRight"></fa-icon> </a></button>
+                    <button (click)="onBottomSubmit()" class="btn" [ngClass]="{'margin-top': mobile}"><a>Get Started <fa-icon class="arrow-right" [icon]="faChevronRight"></fa-icon> </a></button>
                 </div>
                 <p *ngIf="!mobile && bottomInputElementEntered && !bottomInputElementEnteredValid" class="landing-error-msg" style="margin: 7px 0px 0px 7px">{{errorMsg}}</p>
             </div>
