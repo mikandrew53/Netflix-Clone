@@ -14,6 +14,7 @@ import firebase from "firebase";
 export class SignInComponent implements OnInit, OnDestroy {
   isLoginMode = true;
   isAuthenticated = false;
+  loading:boolean = false;
   userSub: Subscription;
   faGlobe = faGlobe
   @ViewChild('EmailInput', {static: true}) emailInput:ElementRef;
@@ -64,9 +65,10 @@ constructor(private authService:AuthService, private router: Router) { }
     }else {
       authObs = this.authService.signup(email, password);
     }
-      
+    this.loading = true;
     authObs.subscribe(
       resData =>  {
+        this.loading = false;
         if(this.isAuthenticated)
           this.router.navigate(['browse']);
       },

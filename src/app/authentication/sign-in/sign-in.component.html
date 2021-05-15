@@ -57,7 +57,10 @@
                         type="submit" 
                         class="Sign-in-btn"
                         >
-                        {{ isLoginMode ? 'Sign In' : 'Sign Up'}} 
+                        <mat-spinner [diameter]="30" [strokeWidth]="2" class="proggress-spinner" *ngIf="loading"></mat-spinner>
+                        <p *ngIf="!loading">Sign In</p>
+                        <!-- {{ isLoginMode ? 'Sign In' : 'Sign Up'}}  -->
+                        <!-- <div class="lds-ring"><div></div><div></div><div></div><div></div></div> -->
                     </button> 
                         <!-- <button (click)="onSwitchMode()" type="button">Switch to {{ isLoginMode ? 'Sign Up' : 'Sign In'}}</button> -->
                     </div>
