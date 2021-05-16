@@ -851,19 +851,99 @@ form {
 }
 
 
-.proggress-spinner {
-    // color: #fff;
+// Signup ---------------------------------------------------------
+.signup-page{
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .signin-top{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #e6e6e6;
+        a {
+            &:last-child {
+                margin-right: 20px;
+                font-size: 1.1rem;
+            }
+            color: #000;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+    
+    .sign-in-bottom {
+        background-color: #f3f3f3;
+        .languages select{
+            background-color: #fff;
+        }
+    }
 }
-.mat-progress-spinner circle, .mat-spinner circle {
+
+.sign-up-content{
+    display: flex;
+    justify-content: center;
+}
+
+.step-one{
+    color: #000;
+    text-align: center;
+    max-width: 340px;
+    img {
+        width: 250px;
+    }
+
+    h5 {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 340px;
+        transition: all 250ms ease-in-out;
+        &:hover {
+            cursor: pointer;
+            background-color: #F6141D;
+        }
+    }
+}
+
+.step-one-b {
+    color: #000;
+    max-width: 440px;
+    align-self: center;
+    h5 {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+
+    .form-group{
+        input{
+            caret-color: #000;
+            background-color: #fff;
+            border: 1px solid #8c8c8c;
+            border-radius: 0;
+        }
+    }
+}
+
+
+.proggress-spinner .mat-progress-spinner circle, .mat-spinner circle {
     stroke: #c9b7b6;
     stroke: #86807E;
-    // stroke: #fff;
-    
-    }
+}
 
 .btn-loading-dark {
     background-color: #781111;
 }
+
+
 
 
 
