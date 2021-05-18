@@ -16,9 +16,11 @@ export class SignInComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
   loading:boolean = false;
   userSub: Subscription;
-  faGlobe = faGlobe
+  faGlobe = faGlobe;
+  init = false;
   @ViewChild('EmailInput', {static: true}) emailInput:ElementRef;
   @ViewChild('PasswordInput', {static: true}) passwordInput:ElementRef;
+  @ViewChild('authForm', {static: true}) authForm: NgForm;
 
 constructor(private authService:AuthService, private router: Router) { }
   error:SignInError;
@@ -35,12 +37,30 @@ constructor(private authService:AuthService, private router: Router) { }
       this.isAuthenticated = !!user;
     });    
   }
-
+  
+  
+  ngAfterContentChecked(): void {
+    if(this.validateEmail(this.authService.getCurrentSignInEmail()) && this.authForm.controls.email && !this.init){
+      this.init = true;
+      this.authForm.controls.email.setValue(this.authService.getCurrentSignInEmail());
+      this.controls.email.valid = true;
+      this.controls.email.touched = true;
+    }
+  }
+      
+  validateEmail(email:string) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
   }
 
   onSubmit(form: NgForm) {
+    console.log(this.controls);
+    console.log(form.controls.email);
+    
+    
     if(!form.valid){
       if(!this.controls.email.touched){
         this.controls.email.valid = false;
@@ -114,6 +134,8 @@ constructor(private authService:AuthService, private router: Router) { }
   }
   
   onEmailKeyDown(form:NgForm){
+    console.log('yoooo');
+    // form.controls.email.
     if(!this.controls.email.touched)
       return;
 

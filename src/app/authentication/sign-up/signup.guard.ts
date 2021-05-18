@@ -11,9 +11,18 @@ export class SignUpGuard implements CanActivate {
 
     canActivate(){
         this.auth.signUpEmail.subscribe(email => {
+            console.log(email);
+            
             this.email = email;
-            if(!this.validateEmail(this.email))
+            if(email === 'false'){
+                console.log('sign in');
+                this.router.navigate(['login'])
+            }
+            else if(!this.validateEmail(this.email)){
+                console.log('here');
+                
                 this.router.navigate(['']);
+            }
         });
         if(!this.validateEmail(this.email))
             this.router.navigate(['']);

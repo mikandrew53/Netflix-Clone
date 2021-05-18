@@ -79,6 +79,7 @@ export class LandingPageComponent implements OnInit {
         active: false
       },
     ]
+
   }
 
   ngAfterViewInit(): void {
@@ -92,7 +93,15 @@ export class LandingPageComponent implements OnInit {
     if(this.topInputElementValid){
       console.log('top');
       this.auth.setSignupEmail(this.emailTop.nativeElement.value);
-      this.router.navigate(['signup']);
+      this.auth.checkEmailapi(this.emailTop.nativeElement.value).subscribe(
+        resDaata => {
+          if(resDaata.registered)
+            this.router.navigate(['login'])
+          else 
+            this.router.navigate(['signup'])
+        }
+      );
+      // this.router.navigate(['signup']);
     }  
   }
   onBottomSubmit() {

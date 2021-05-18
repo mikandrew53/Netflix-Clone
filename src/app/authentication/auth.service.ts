@@ -28,10 +28,11 @@ export interface SignInError {
 })
 export class AuthService {
   user = new BehaviorSubject<User>(null);
+  signUpEmail = new BehaviorSubject<string>(null);
+  private currentSignInEmail = '';
   private tokenExpirationTimer: any;
   private authenticated:boolean = false;
   private TMBD_token: string;
-  signUpEmail = new BehaviorSubject<string>(null);
 
   constructor(
     private http: HttpClient,
@@ -40,15 +41,20 @@ export class AuthService {
 
   setSignupEmail(email:string) {
     this.signUpEmail.next(email);
+    this.currentSignInEmail = email;
   }  
 
-  checkEmail(email) {
-     this.http.post<{kind: string, registered: boolean, sessionId: string}>(
-      'https://identitytoolkit.googleapis.com/v1/accounts:createAuthUri?key=AIzaSyAqNPn9SlOiwFUGi0466PeGMMUtpizmIZ4', 
-    {
-      identifier: email,
-      continueUri: 'http://192.168.2.73:4200/'
-    })
+  getCurrentSignInEmail(){
+    return this.currentSignInEmail;
+  }
+  
+  checkEmailapi(email){
+    return this.http.post<{kind: string, registered: boolean, sessionId: string}>(
+     'https://identitytoolkit.googleapis.com/v1/accounts:createAuthUri?key=AIzaSyAqNPn9SlOiwFUGi0466PeGMMUtpizmIZ4', 
+   {
+     identifier: email,
+     continueUri: 'http://192.168.2.73:4200/'
+   })
   }
 
   signup(email: string, password: string) {

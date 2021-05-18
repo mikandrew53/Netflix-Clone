@@ -14,27 +14,27 @@ export class SignUpComponent implements OnInit {
   constructor(private auth:AuthService) { }
 
   ngOnInit(): void {
-    this.auth.checkEmail('test@test.com').subscribe(
-      resData =>  {
-        console.log('test@test.com ' + resData.registered);
-        console.log(resData);
+    // this.auth.checkEmail('test@test.com').subscribe(
+    //   resData =>  {
+    //     console.log('test@test.com ' + resData.registered);
+    //     console.log(resData);
         
-      },
-      error => {
-        console.log(error);
-      }
-    );
-      this.auth.checkEmail('test1@test.com').subscribe(
-        resData =>  {
-        console.log('success');
-        console.log('test1@test.com ' + resData.registered);
-        console.log(resData);
+    //   },
+    //   error => {
+    //     console.log(error);
+    //   }
+    // );
+    //   this.auth.checkEmail('test1@test.com').subscribe(
+    //     resData =>  {
+    //     console.log('success');
+    //     console.log('test1@test.com ' + resData.registered);
+    //     console.log(resData);
         
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    //   },
+    //   error => {
+    //     console.log(error);
+    //   }
+    // );
     
     // this.auth.signup('test@test1.com', '').subscribe(data => console.log(data));
     
