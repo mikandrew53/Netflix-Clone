@@ -39,10 +39,17 @@ export class AuthService {
     ) { }
 
   setSignupEmail(email:string) {
-    console.log(email);
-    
     this.signUpEmail.next(email);
   }  
+
+  checkEmail(email) {
+     this.http.post<{kind: string, registered: boolean, sessionId: string}>(
+      'https://identitytoolkit.googleapis.com/v1/accounts:createAuthUri?key=AIzaSyAqNPn9SlOiwFUGi0466PeGMMUtpizmIZ4', 
+    {
+      identifier: email,
+      continueUri: 'http://192.168.2.73:4200/'
+    })
+  }
 
   signup(email: string, password: string) {
     return this.http.post<AuthResponseData>(
@@ -64,6 +71,8 @@ export class AuthService {
   }
 
   handleSignUpError(errorRes: HttpErrorResponse){
+    console.log(errorRes);
+    
     let errorMessage = 'An unkown error occurred';
       if(!errorRes.error || !errorRes.error.error){
         return throwError(errorMessage);
