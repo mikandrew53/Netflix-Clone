@@ -120,10 +120,6 @@ constructor(private authService:AuthService, private router: Router) { }
     // https://netflix-clone-9fb80.firebaseapp.com/__/auth/handler
   }
 
-  ngOnDestroy() {
-    this.userSub.unsubscribe();
-  }
-
   onEmailFocousOut(form: NgForm){
     this.controls.email.touched = true;
     if(form.controls.email.status === 'INVALID') {
@@ -134,8 +130,6 @@ constructor(private authService:AuthService, private router: Router) { }
   }
   
   onEmailKeyDown(form:NgForm){
-    console.log('yoooo');
-    // form.controls.email.
     if(!this.controls.email.touched)
       return;
 
@@ -170,5 +164,9 @@ constructor(private authService:AuthService, private router: Router) { }
 
   loginWithFacebook(){
     this.authService.facebookSigIn();
+  }
+
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
   }
 }

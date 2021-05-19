@@ -1,97 +1,101 @@
 <div class="signup-page">
     <div class="signin-top">
         <a routerLink=""><img src="./../../assets/01_Netflix_Logo/01_Netflix_Logo_RGB/Netflix_Logo_RGB.png" alt="" class="logo-img"></a> 
-        <a routerLink="/login">Sign In</a> 
+        <a (click)="OnSignIn()">Sign In</a> 
     </div>
-        <!-- <div class="sign-up-content">
-            <div class="step-one">
-                <img src="/assets/Devices.png" alt="">
-                <h4>STEP 1 OF 3</h4>
-                <h5>Finish setting up your account.</h5>
-                <p>Netflix is personalized for you. Create a password to watch Netflix on any device at any time.</p>
-                <button class="btn">Continue</button>
-            </div> -->
+      <div class="sign-up-content">
+        <div class="step-one" *ngIf="stepOne">
+            <img src="/assets/Devices.png" alt="">
+            <h4>STEP 1 OF 3</h4>
+            <h5>Finish setting up your account.</h5>
+            <p>Netflix is personalized for you. Create a password to watch Netflix on any device at any time.</p>
+            <button class="btn">Continue</button>
+        </div>
 
-            <div class="step-one-b">
-                <h4>STEP 1 OF 3</h4>
-                <h5>Create a password to start your membership.</h5>
-                <p>Just a few more steps and you're done! We hate paperwork, too.</p>
-                <form class="sign-in-form" #authForm="ngForm">
-                    <!-- <div class="sign-in-error" *ngIf="!!error"> -->
-                        <!-- <p>{{error.msg}}</p> -->
-                    <!-- </div> -->
-                    <div class="form-group">
-                        <input 
-                        type="email" 
-                        id="email"
-                        ngModel
-                        required
-                        email
-                        name="email"
-                        class="sign-in-input"
-                        #EmailInput
-                        >
-                        <label for="email" class="form-label" [ngClass]="{'keep-label-up': false}">
-                            <span class="form-label-content">Email</span>
-                        </label>
+
+        <div class="step-one-b" *ngIf="stepOneB"> 
+            <h4>STEP 1 OF 3</h4>
+            <h5>Create a password to start your membership.</h5>
+            <p>Just a few more steps and you're done! We hate paperwork, too.</p>
+            <form class="sign-in-form" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+                <div class="form-group" [ngClass]="{'margin-bottom': !controls.email.valid && controls.email.touched}">
+                    <input 
+                    type="email" 
+                    id="email"
+                    ngModel
+                    required
+                    email
+                    name="email"
+                    class="sign-in-input"
+                    #EmailInput
+                    [ngClass]="{'form-input-error': !controls.email.valid && controls.email.touched, 'form-input-valid': controls.email.valid && controls.email.touched}"
+                    (focusout)="onEmailFocousOut(authForm)"
+                    (keyup)="onEmailKeyDown(authForm)"
+                    >
+                    <label for="email" class="form-label" [ngClass]="{'keep-label-up': !!emailInput.nativeElement.value}">
+                        <span class="form-label-content">Email</span>
+                    </label>
+                </div>
+                <p *ngIf="controls.email.touched && !controls.email.valid" class="sign-in-error-msg">{{ controls.email.errorMsg }}</p>
+    
+                <div class="form-group" style="margin-bottom: 0;">
+                    <input 
+                    type="password"
+                    id="password"
+                    ngModel
+                    name="password"
+                    class="form-control"
+                    required 
+                    minlength="6"    
+                    class="sign-in-input"
+                    [ngClass]="{'form-input-error': !controls.password.valid && controls.password.touched, 'form-input-valid': controls.password.valid && controls.password.touched}"
+                    (focusout)="onPasswordFocousOut(authForm)"
+                    (keyup)="onPasswordKeyDown(authForm)"
+                    #PasswordInput
+                    >
+                    <label for="password" class="form-label" [ngClass]="{'keep-label-up': !!passwordInput.nativeElement.value}">
+                        <span class="form-label-content">Password</span>
+                    </label>
+                </div>
+                <p *ngIf="controls.password.touched && !controls.password.valid"class="sign-in-error-msg">{{ controls.password.errorMsg }}</p>
+    
+                <div>
+                    <div class="checkbox">
+                        <input type="checkbox" id="no-emails">
+                        <label for="no-emails">Please do not email me Netflix special offers.</label>
                     </div>
-                    <!-- <p *ngIf="controls.email.touched && !controls.email.valid" class="sign-in-error-msg">{{ controls.email.errorMsg }}</p> -->
-        
-                    <div class="form-group" style="margin-bottom: 0;">
-                        <input 
-                        type="password"
-                        id="password"
-                        ngModel
-                        name="password"
-                        class="form-control"
-                        required 
-                        minlength="6"    
-                        class="sign-in-input"
-                        #PasswordInput
-                        >
-                        <label for="password" class="form-label" [ngClass]="{'keep-label-up': false}">
-                            <span class="form-label-content">Password</span>
-                        </label>
-                    </div>
-                    <!-- <p *ngIf="controls.password.touched && !controls.password.valid"class="sign-in-error-msg">{{ controls.password.errorMsg }}</p> -->
-        
-                    <div>
-                        <div class="checkbox">
-                            <input type="checkbox" id="no-emails">
-                            <label for="no-emails">Please do not email me Netflix special offers.</label>
-                        </div>
-                        <button 
-                        type="submit" 
-                        class="Sign-in-btn"
-                        >
-                        <!-- <mat-spinner [diameter]="30" [strokeWidth]="2" class="proggress-spinner" *ngIf="loading"></mat-spinner> -->
-                        <p>Continue</p>
-                    </button> 
-                    </div>
-                </form>
+                    <button 
+                    type="submit" 
+                    class="Sign-in-btn"
+                    [ngClass]="{'btn-loading-dark': loading}"
+                    >
+                    <mat-spinner [diameter]="30" [strokeWidth]="2" class="proggress-spinner" *ngIf="loading"></mat-spinner>
+                    <p *ngIf="!loading">Sign In</p>
+                </button> 
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="sign-in-bottom">
+        <div class="sign-in-bottom-wrapper">
+            <div class="info-top">
+                <p class="">Question? Call <a href="tel:1-844-542-4813">1-844-542-4813</a></p> 
             </div>
-        <!-- </div> -->
-        <div class="sign-in-bottom">
-            <div class="sign-in-bottom-wrapper">
-                <div class="info-top">
-                    <p class="">Question? Call <a href="tel:1-844-542-4813">1-844-542-4813</a></p> 
-                </div>
-                <div class="info-middle">
-                    <a href="">FAQ</a>
-                    <a href="">Help Center</a>
-                    <a href="">Terms of Use</a>
-                    <a href="">Privacy</a>
-                    <a href="">Cookie Preferences</a>
-                    <a href="">Corporate Information</a>
-                </div>
-                <div class="info-bottom">
-                    <div class="languages">
-                        <span class="globe"><fa-icon [icon]="faGlobe"></fa-icon></span>
-                        <select name="languages">
-                            <option value="English">English</option>
-                        </select>
-                        <span class="select-arrow"></span>
-                    </div>
+            <div class="info-middle">
+                <a href="">FAQ</a>
+                <a href="">Help Center</a>
+                <a href="">Terms of Use</a>
+                <a href="">Privacy</a>
+                <a href="">Cookie Preferences</a>
+                <a href="">Corporate Information</a>
+            </div>
+            <div class="info-bottom">
+                <div class="languages">
+                    <span class="globe"><fa-icon [icon]="faGlobe"></fa-icon></span>
+                    <select name="languages">
+                        <option value="English">English</option>
+                    </select>
+                    <span class="select-arrow"></span>
                 </div>
             </div>
         </div>
