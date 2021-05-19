@@ -4,16 +4,19 @@
         <a (click)="OnSignIn()">Sign In</a> 
     </div>
       <div class="sign-up-content">
-        <div class="step-one" *ngIf="stepOne">
+        <div class="step-one" [ngClass]="{'dont-display': !stepOne}">
             <img src="/assets/Devices.png" alt="">
             <h4>STEP 1 OF 3</h4>
             <h5>Finish setting up your account.</h5>
             <p>Netflix is personalized for you. Create a password to watch Netflix on any device at any time.</p>
-            <button class="btn">Continue</button>
+            <button class="btn" (click)="goToStepOneB()">Continue</button>
         </div>
 
 
-        <div class="step-one-b" *ngIf="stepOneB"> 
+        <div class="step-one-b" [ngClass]="{'dont-display': !stepOneB}"> 
+            <div class="sign-in-error" *ngIf="!!error">
+                <p>{{error}} <span *ngIf="emailExists"> <a (click)="goToSignIn()" style="text-decoration: underline;">Sign into that account</a> or try using a different email.</span></p>
+            </div>
             <h4>STEP 1 OF 3</h4>
             <h5>Create a password to start your membership.</h5>
             <p>Just a few more steps and you're done! We hate paperwork, too.</p>
@@ -60,10 +63,10 @@
                 <p *ngIf="controls.password.touched && !controls.password.valid"class="sign-in-error-msg">{{ controls.password.errorMsg }}</p>
     
                 <div>
-                    <div class="checkbox">
+                    <!-- <div class="checkbox">
                         <input type="checkbox" id="no-emails">
                         <label for="no-emails">Please do not email me Netflix special offers.</label>
-                    </div>
+                    </div> -->
                     <button 
                     type="submit" 
                     class="Sign-in-btn"
@@ -74,6 +77,10 @@
                 </button> 
                 </div>
             </form>
+        </div>
+
+        <div class="step-two" [ngClass]="{'dont-display': !stepTwo}">
+            <p>step Two</p>
         </div>
     </div>
     <div class="sign-in-bottom">

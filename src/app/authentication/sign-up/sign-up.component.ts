@@ -21,6 +21,8 @@ export class SignUpComponent implements OnInit {
   stepOneB:boolean = false;
   stepTwo: boolean = false;
   stepThree: boolean = false;
+  error;
+  emailExists:boolean = false;
   controls =  {
     email: { valid: false, errorMsg: '', touched: false },
     password: { valid: false, errorMsg: '', touched: false }
@@ -40,11 +42,23 @@ export class SignUpComponent implements OnInit {
   }
 
   ngAfterContentChecked(): void {
+    
     if(this.validateEmail(this.authService.getCurrentSignInEmail()) && this.authForm.controls.email && !this.init){
       this.init = true;
       this.authForm.controls.email.setValue(this.authService.getCurrentSignInEmail());
       this.controls.email.valid = true;
     }
+  }
+  
+  ngAfterViewChecked(): void {
+    //Called after every check of the component's view. Applies to components only.
+    //Add 'implements AfterViewChecked' to the class.
+    
+  }
+  
+  goToStepOneB() {
+    this.stepOne = false;
+    this.stepOneB = true;
   }
 
   validateEmail(email:string) {
@@ -67,8 +81,8 @@ export class SignUpComponent implements OnInit {
   }
   
   onEmailKeyDown(form:NgForm){
-    console.log(this.emailInput.nativeElement.value);
-    console.log(this.emailInput.nativeElement.value === '');
+    // console.log(this.emailInput.nativeElement.value);
+    // console.log(this.emailInput.nativeElement.value === '');
     
     if(!this.controls.email.touched)
       return;
@@ -94,7 +108,6 @@ export class SignUpComponent implements OnInit {
   }
   
   onPasswordKeyDown(form:NgForm){
-    console.log(form.controls.password);
     if(!this.controls.password.touched)
       return;
 
@@ -133,18 +146,54 @@ export class SignUpComponent implements OnInit {
         resData =>  {
           console.log(resData);
           this.loading = false;
-          if(this.isAuthenticated)
-            this.router.navigate(['browse']);
+          // if(this.isAuthenticated){
+            console.log('authenticated');
+            
+            this.stepOneB = false;
+            this.stepTwo = true;
+            // this.router.navigate(['browse']);
+          // }
         },
         error => {
-          // this.handleServerError(error, form)
+          console.log('error');
+          
+          this.handleServerError(error, form)
+          console.log(error);
+          
           this.loading = false;
         }
       );
   }
 
+  goToSignIn() {
+    this.authService.setSignupEmail(this.emailInput.nativeElement.value);
+    this.router.navigate(['login'])
+  }
+  handleServerError(error, form:NgForm){
+    this.error = error;
+    if(this.error === 'This email exists already')
+      this.emailExists = true;
+    this.controls.email.touched = true;
+    this.controls.password.touched = true;
+    if(error.clearEmail){
+      this.emailInput.nativeElement.value = '';
+      this.controls.email.valid = false;
+      this.controls.email.errorMsg = '';
+      form.controls.email.reset();
+
+    }
+    if(error.clearPassword){
+      this.passwordInput.nativeElement.value = '';
+      this.controls.password.errorMsg = '';
+      this.controls.password.valid = false;
+      form.controls.password.reset();
+    }
+
+    // https://netflix-clone-9fb80.firebaseapp.com/__/auth/handler
+  }
+
   ngOnDestroy() {
-    this.userSub.unsubscribe();
+    // this.userSub.unsubscribe();
   }
 
 
