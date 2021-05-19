@@ -996,6 +996,50 @@ form {
     }
 }
 
+.step-two-b {
+    max-width: 808px; 
+    width: 90%;
+    .step {
+        text-align: left;
+    }
+    .title {
+        font-size: 1.4rem;
+    }
+
+    .table-header {
+        // display: flex;
+        // justify-content: flex-end;
+        .plan {
+            border: 1px solid #c4c4c4;
+            margin-right: 20px;
+            height: 90px;
+            width: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            p{
+                margin: 0;
+            }
+        }
+        .plan-selected {
+            background-color: #e50914;
+            box-shadow: 0 0 3px 0 #e50914;
+            border: none;
+            p {
+                color: #fff;
+            }
+        }
+    }
+    .plan-selected-content{
+        color: #e50914;
+
+    }
+    .table {
+        width: 100%;
+        
+    }
+}
+
 .warning-icon {
     font-size: 26px;
     margin-right: 15px;
