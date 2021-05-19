@@ -1,9 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { faGlobe } from '@fortawesome/free-solid-svg-icons';
+import { faGlobe, faExclamationTriangle, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { Observable, Subscription } from 'rxjs';
 import { AuthResponseData, AuthService } from '../auth.service';
+
 
 @Component({
   selector: 'app-sign-up',
@@ -13,14 +14,23 @@ import { AuthResponseData, AuthService } from '../auth.service';
 export class SignUpComponent implements OnInit {
   init = false;
   faGlobe = faGlobe;
-  isLoginMode = true;
+  faCheck = faCheck;
+  faExclamationTriangle = faExclamationTriangle;
   isAuthenticated = false;
   loading:boolean = false;
   userSub: Subscription;
-  stepOne:boolean = true;
+  // stepOne:boolean = true;
+  // stepOneOpened:boolean = true;
+  stepOne:boolean = false;
+  stepOneOpened:boolean = false;
   stepOneB:boolean = false;
+  stepOneBOpened:boolean = false;
   stepTwo: boolean = false;
+  stepTwoB: boolean = false;
+  stepTwoOpened: boolean = false;
+  stepTwoBOpened: boolean = false;
   stepThree: boolean = false;
+  stepThreeOpened: boolean = false;
   error;
   emailExists:boolean = false;
   controls =  {
@@ -59,6 +69,12 @@ export class SignUpComponent implements OnInit {
   goToStepOneB() {
     this.stepOne = false;
     this.stepOneB = true;
+    this.stepOneBOpened = true;
+  }
+  goToStepTwoB(){
+    this.stepTwo = false;
+    this.stepTwoB = true;
+    this.stepTwoBOpened = true;
   }
 
   validateEmail(email:string) {
@@ -148,7 +164,6 @@ export class SignUpComponent implements OnInit {
           this.loading = false;
           // if(this.isAuthenticated){
             console.log('authenticated');
-            
             this.stepOneB = false;
             this.stepTwo = true;
             // this.router.navigate(['browse']);
@@ -173,6 +188,8 @@ export class SignUpComponent implements OnInit {
     this.error = error;
     if(this.error === 'This email exists already')
       this.emailExists = true;
+
+      
     this.controls.email.touched = true;
     this.controls.password.touched = true;
     if(error.clearEmail){

@@ -4,7 +4,7 @@
         <a (click)="OnSignIn()">Sign In</a> 
     </div>
       <div class="sign-up-content">
-        <div class="step-one" [ngClass]="{'dont-display': !stepOne}">
+        <div class="step-one" [ngClass]="{'hide': !stepOne, 'display-first': stepOne}">
             <img src="/assets/Devices.png" alt="">
             <h4>STEP 1 OF 3</h4>
             <h5>Finish setting up your account.</h5>
@@ -12,10 +12,10 @@
             <button class="btn" (click)="goToStepOneB()">Continue</button>
         </div>
 
-
-        <div class="step-one-b" [ngClass]="{'dont-display': !stepOneB}"> 
+        <div class="step-one-b" [ngClass]="{'hide': !stepOneB && stepOneBOpened, 'display': stepOneB, 'dont-display': !stepOneBOpened && !stepOneB}"> 
             <div class="sign-in-error" *ngIf="!!error">
-                <p>{{error}} <span *ngIf="emailExists"> <a (click)="goToSignIn()" style="text-decoration: underline;">Sign into that account</a> or try using a different email.</span></p>
+                <span><fa-icon class="warning-icon" [icon]="faExclamationTriangle"></fa-icon></span>
+                <p><span style="font-weight: 500;">{{error}} </span> <span *ngIf="emailExists"> <a (click)="goToSignIn()" style="text-decoration: underline;">Sign into that account</a> or try using a different email.</span></p>
             </div>
             <h4>STEP 1 OF 3</h4>
             <h5>Create a password to start your membership.</h5>
@@ -63,26 +63,42 @@
                 <p *ngIf="controls.password.touched && !controls.password.valid"class="sign-in-error-msg">{{ controls.password.errorMsg }}</p>
     
                 <div>
-                    <!-- <div class="checkbox">
-                        <input type="checkbox" id="no-emails">
-                        <label for="no-emails">Please do not email me Netflix special offers.</label>
-                    </div> -->
                     <button 
                     type="submit" 
                     class="Sign-in-btn"
-                    [ngClass]="{'btn-loading-dark': loading}"
+                    [ngClass]="{'btn-loading-light': loading}"
                     >
-                    <mat-spinner [diameter]="30" [strokeWidth]="2" class="proggress-spinner" *ngIf="loading"></mat-spinner>
+                    <mat-spinner [diameter]="30" [strokeWidth]="2" class="proggress-spinner-light" *ngIf="loading"></mat-spinner>
                     <p *ngIf="!loading">Sign In</p>
                 </button> 
                 </div>
             </form>
         </div>
 
-        <div class="step-two" [ngClass]="{'dont-display': !stepTwo}">
-            <p>step Two</p>
+            <div class="step-two" [ngClass]="{'hide': !stepTwo && stepTwoOpened, 'display': stepTwo, 'dont-display': !stepTwoOpened}">
+                <div class="justify-center">
+                    <div class="check-icon-wrapper"><mat-icon class="check-icon">done</mat-icon></div>
+                </div> 
+                <h4 class="step">STEP 2 OF 3</h4>
+                <h5 class="title">Choose your plan.</h5>
+                <p class="center"><span class="check-icon"><mat-icon>done</mat-icon></span> No commitments, cancel anytime.</p>
+                <p class="center"><span class="check-icon"><mat-icon>done</mat-icon></span> Everything on Netflix for one low price.</p>
+                <p class="center"><span class="check-icon"><mat-icon>done</mat-icon></span> Unlimited viewing on all your devices.</p>
+                <div class="justify-center">
+                    <button class="btn" (click)="goToStepTwoB()">See the Plans</button> 
+                </div>
+            </div> 
+            
+            <div class="step-two-b" [ngClass]="{'hide': !stepTwoB && stepTwoBOpened, 'display': stepTwoB, 'dont-display': !stepTwoBOpened}">
+                
+            </div>
+
+            <div class="step-two-b">
+                <h1>yooo</h1>
+            </div>
         </div>
-    </div>
+        
+        
     <div class="sign-in-bottom">
         <div class="sign-in-bottom-wrapper">
             <div class="info-top">

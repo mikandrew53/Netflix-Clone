@@ -859,6 +859,7 @@ form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    color: #000;
 
     .signin-top{
         display: flex;
@@ -888,6 +889,30 @@ form {
 .sign-up-content{
     display: flex;
     justify-content: center;
+    align-items: center;
+    .btn {
+        width: 100%;
+        max-width: 340px;
+        transition: all 250ms ease-in-out;
+        max-width: 90vw;
+        &:hover {
+            cursor: pointer;
+            background-color: #F6141D;
+        }
+    }
+    .title {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+
+    .step {
+        text-align: center;
+    }
+}
+
+.justify-center {
+    display: flex;
+    justify-content: center;
 }
 
 .step-one{
@@ -896,22 +921,7 @@ form {
     max-width: 340px;
     img {
         width: 250px;
-    }
-
-    h5 {
-        font-size: 2rem;
-        line-height: 1.2;
-    }
-
-    .btn {
-        width: 100%;
-        max-width: 340px;
-        transition: all 250ms ease-in-out;
-        &:hover {
-            cursor: pointer;
-            background-color: #F6141D;
-        }
-    }
+    }    
 }
 
 .step-one-b {
@@ -950,6 +960,9 @@ form {
         background-color: #ffa00a;
         border-radius: 2px;
         color: #fff;
+        display: flex;
+        align-items: center;
+        padding: 20px;
         p {
             margin: 0;
             font-size: 1rem;
@@ -957,18 +970,124 @@ form {
     }
 }
 
-.dont-display {
-    display: none;
+.step-two {
+    .title {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .check-icon-wrapper{
+        display: flex;
+        justify-content: center;
+        border: 2px solid #e50914;
+        border-radius: 50%;
+        width: fit-content;
+        padding: 10px;
+        margin: 0 0 20px 0;
+        .check-icon {
+            margin: 0;
+            font-size: 26px;
+            height: 26px;
+            width: 26px;
+        }
+    }
+    .btn {
+        margin-top: 20px;
+    }
 }
+
+.warning-icon {
+    font-size: 26px;
+    margin-right: 15px;
+}
+
+.dont-display {
+    // display: none;
+    position: absolute;
+    transform: translateX(350px);
+    opacity: 0;
+    // transition: all 250ms ease-in-out;
+    pointer-events: none;
+}
+
+.display-first{
+    position: static;
+    opacity: 1;
+    transform: translateX(0px);
+}
+
+.display {
+    position: absolute;
+    opacity: 0;
+    pointer-events: all;
+    animation: show 350ms ease-in-out 350ms forwards;
+}
+.hide {
+    animation: hide 350ms ease-in-out forwards;
+    pointer-events: none;
+}
+
+.check-icon {
+    color: #e50914;
+    margin-right: 12px;
+
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    // justify-content: center;
+}
+
+
+@keyframes show{
+    0% {
+        transform: translateX(350px);
+        opacity: 0;
+    }
+    50%{
+        transform: translateX(0px);
+        opacity: 1;
+    }
+    100%{
+        transform: translateX(0px);
+        opacity: 1;
+        position: static;
+    }
+}
+
+@keyframes hide {
+    0% {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+    50%{
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+    100%{
+        transform: translateX(-100px);
+        opacity: 0;
+        position: absolute;
+    }
+}
+
 
 
 .proggress-spinner .mat-progress-spinner circle, .mat-spinner circle {
     stroke: #c9b7b6;
     stroke: #86807E;
 }
+.proggress-spinner-light .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #fff;
+    // stroke: #86807E;
+}
 
 .btn-loading-dark {
     background-color: #781111;
+}
+.btn-loading-light {
+    background-color: #FD9592;
 }
 
 

@@ -17,7 +17,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SignUpComponent } from './authentication/sign-up/sign-up.component';
-
+import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -39,7 +39,8 @@ import { SignUpComponent } from './authentication/sign-up/sign-up.component';
     FontAwesomeModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIconModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
