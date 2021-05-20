@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { faGlobe, faExclamationTriangle, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faGlobe, faExclamationTriangle, faCheck, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { Observable, Subscription } from 'rxjs';
 import { AuthResponseData, AuthService } from '../auth.service';
 
@@ -15,6 +15,7 @@ export class SignUpComponent implements OnInit {
   init = false;
   faGlobe = faGlobe;
   faCheck = faCheck;
+  faCaretDown = faCaretDown;
   faExclamationTriangle = faExclamationTriangle;
   isAuthenticated = false;
   loading:boolean = false;
@@ -37,6 +38,9 @@ export class SignUpComponent implements OnInit {
     email: { valid: false, errorMsg: '', touched: false },
     password: { valid: false, errorMsg: '', touched: false }
   }
+  premiumSelected: boolean = true;
+  standardSelected: boolean = false;
+  basicSelected: boolean = false;
 
   emailErrorMsg:string = 'Please enter a valid email address.'
   passwordErrorMsg:string = 'Your password must contain at least 6 characters.'
@@ -64,6 +68,23 @@ export class SignUpComponent implements OnInit {
     //Called after every check of the component's view. Applies to components only.
     //Add 'implements AfterViewChecked' to the class.
     
+  }
+
+  onPremiumSelected(){
+    this.premiumSelected = true;
+    this.basicSelected = false;
+    this.standardSelected = false;
+  }
+
+  onBasicSelected(){
+    this.premiumSelected = false;
+    this.basicSelected = true;
+    this.standardSelected = false;
+  }
+  onStandardSelected(){
+    this.premiumSelected = false;
+    this.basicSelected = false;
+    this.standardSelected = true;
   }
   
   goToStepOneB() {

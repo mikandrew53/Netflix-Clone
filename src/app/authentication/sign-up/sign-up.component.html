@@ -103,47 +103,53 @@
                     <tr class="table-header">
                         <th></th>
                         <th>
-                            <div class="plan">
+                            <div class="plan" (click)='onBasicSelected()' [ngClass]="{'plan-selected': basicSelected}">
                             <p>Basic</p>
+                            <fa-icon *ngIf="basicSelected" class="arrow-down" [icon]="faCaretDown"></fa-icon>
                         </div>
                         </th>
                         <th>
-                            <div class="plan">
+                            <div class="plan" (click)='onStandardSelected()' [ngClass]="{'plan-selected': standardSelected}">
                                 <p>Standard</p>
+                                <fa-icon *ngIf="standardSelected" class="arrow-down" [icon]="faCaretDown"></fa-icon>
                             </div>
                         </th>
                         <th>
-                            <div class="plan plan-selected">
+                            <div class="plan" (click)='onPremiumSelected()' [ngClass]="{'plan-selected': premiumSelected}">
                                 <p>Premium</p>
+                                <fa-icon *ngIf="premiumSelected" class="arrow-down" [icon]="faCaretDown"></fa-icon>
                             </div>
                         </th>
                     </tr>
-                    <tr>
-                        <td>Monthly price</td>
-                        <td><p style="width: 90px;">$9.99</p></td>
-                        <td>$14.99</td>
-                        <td class="plan-selected-content">$18.99</td>
+                    <tr class="table-row border-bottom">
+                            <td>Monthly price</td>
+                            <td (click)='onBasicSelected()'><p [ngClass]="{'plan-selected-content': basicSelected}" class="table-content">$9.99</p></td>
+                            <td (click)='onStandardSelected()'><p [ngClass]="{'plan-selected-content': standardSelected}" class="table-content">$14.99</p></td>
+                            <td (click)='onPremiumSelected()'><p [ngClass]="{'plan-selected-content': premiumSelected}" class="table-content">$18.99</p></td>
                     </tr>
 
-                    <tr>
+                    <tr class="table-row border-bottom">
                         <td>Video quality</td>
-                        <td>Good</td>
-                        <td>Better</td>
-                        <td class="plan-selected-content">Best</td>
+                        <td (click)='onBasicSelected()'><p [ngClass]="{'plan-selected-content': basicSelected}" class="table-content">Good</p></td>
+                        <td (click)='onStandardSelected()'><p [ngClass]="{'plan-selected-content': standardSelected}" class="table-content">Better</p></td>
+                        <td (click)='onPremiumSelected()'><p class="table-content" [ngClass]="{'plan-selected-content': premiumSelected}">Best</p></td>
                     </tr>
-                    <tr>
+                    <tr class="table-row border-bottom">
                         <td>Resolution</td>
-                        <td >480p</td>
-                        <td>1080p</td>
-                        <td class="plan-selected-content">4K+HDR</td>
+                        <td (click)='onBasicSelected()'><p [ngClass]="{'plan-selected-content': basicSelected}" class="table-content">480p</p></td>
+                        <td (click)='onStandardSelected()'><p [ngClass]="{'plan-selected-content': standardSelected}" class="table-content">1080p</p></td>
+                        <td (click)='onPremiumSelected()'><p [ngClass]="{'plan-selected-content': premiumSelected}" class="table-content">4K+HDR</p></td>
                     </tr>
-                    <tr>
+                    <tr class="table-row">
                         <td>Watch on your TV, computer, mobile phone and tablet</td>
-                        <td><mat-icon>done</mat-icon></td>
-                        <td><mat-icon>done</mat-icon></td>
-                        <td><mat-icon class="plan-selected-content">done</mat-icon></td>
+                        <td (click)='onBasicSelected()'><mat-icon [ngClass]="{'plan-selected-content': basicSelected}" class="table-content">done</mat-icon></td>
+                        <td (click)='onStandardSelected()'><mat-icon [ngClass]="{'plan-selected-content': standardSelected}" class="table-content">done</mat-icon></td>
+                        <td (click)='onPremiumSelected()'><mat-icon  [ngClass]="{'plan-selected-content': premiumSelected}" class="table-content">done</mat-icon></td>
                     </tr>
                 </table>
+                <p class="step-two-b-bottom-msg">HD (720p), Full HD (1080p), Ultra HD (4K) and HDR availability subject to your internet service and device capabilities. Not all content is available in all resolutions. See our Terms of Use for more details.</p>
+                <p class="step-two-b-bottom-msg">Only people who live with you may use your account. Watch on 4 different devices at the same time with Premium, 2 with Standard and 1 with Basic.</p>
+                <button class="btn">Continue</button>
             </div>
         </div>
         
