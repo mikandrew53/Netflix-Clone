@@ -20,10 +20,10 @@ export class SignUpComponent implements OnInit {
   isAuthenticated = false;
   loading:boolean = false;
   userSub: Subscription;
-  // stepOne:boolean = true;
-  // stepOneOpened:boolean = true;
-  stepOne:boolean = false;
-  stepOneOpened:boolean = false;
+  stepOne:boolean = true;
+  stepOneOpened:boolean = true;
+  // stepOne:boolean = false;
+  // stepOneOpened:boolean = false;
   stepOneB:boolean = false;
   stepOneBOpened:boolean = false;
   stepTwo: boolean = false;
@@ -97,6 +97,11 @@ export class SignUpComponent implements OnInit {
     this.stepTwoB = true;
     this.stepTwoBOpened = true;
   }
+  goTostepThree(){
+    this.stepTwoB = false;
+    this.stepThree = true;
+    this.stepThreeOpened = true;
+  }
 
   validateEmail(email:string) {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -159,12 +164,12 @@ export class SignUpComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     if(!form.valid){
-      if(!this.controls.email.touched){
+      if(!this.controls.email.valid){
         this.controls.email.valid = false;
         this.controls.email.errorMsg = this.emailErrorMsg;
         this.controls.email.touched = true;
       }
-      if(!this.controls.password.touched){
+      if(!this.controls.password.valid){
         this.controls.password.valid = false;
         this.controls.password.errorMsg = this.passwordErrorMsg;
         this.controls.password.touched = true;

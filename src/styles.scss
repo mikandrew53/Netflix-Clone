@@ -890,6 +890,8 @@ form {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 900px;
+    max-height: 90vh;
     .btn {
         width: 100%;
         max-width: 340px;

@@ -1,8 +1,11 @@
 <div class="signup-page">
+    
+    
     <div class="signin-top">
         <a routerLink=""><img src="./../../assets/01_Netflix_Logo/01_Netflix_Logo_RGB/Netflix_Logo_RGB.png" alt="" class="logo-img"></a> 
         <a (click)="OnSignIn()">Sign In</a> 
     </div>
+
       <div class="sign-up-content">
         <div class="step-one" [ngClass]="{'hide': !stepOne, 'display-first': stepOne}">
             <img src="/assets/Devices.png" alt="">
@@ -75,85 +78,86 @@
             </form>
         </div>
 
-            <div class="step-two" [ngClass]="{'hide': !stepTwo && stepTwoOpened, 'display': stepTwo, 'dont-display': !stepTwoOpened}">
-                <div class="justify-center">
-                    <div class="check-icon-wrapper"><mat-icon class="check-icon">done</mat-icon></div>
-                </div> 
-                <h4 class="step">STEP <span style="font-weight: 500;">2</span> OF <span style="font-weight: 500;">3</span></h4>
-                <h5 class="title">Choose your plan.</h5>
-                <p class="center"><span class="check-icon"><mat-icon>done</mat-icon></span> No commitments, cancel anytime.</p>
-                <p class="center"><span class="check-icon"><mat-icon>done</mat-icon></span> Everything on Netflix for one low price.</p>
-                <p class="center"><span class="check-icon"><mat-icon>done</mat-icon></span> Unlimited viewing on all your devices.</p>
-                <div class="justify-center">
-                    <button class="btn" (click)="goToStepTwoB()">See the Plans</button> 
-                </div>
+        <div class="step-two" [ngClass]="{'hide': !stepTwo && stepTwoOpened, 'display': stepTwo, 'dont-display': !stepTwoOpened}">
+            <div class="justify-center">
+                <div class="check-icon-wrapper"><mat-icon class="check-icon">done</mat-icon></div>
             </div> 
-            
-            <div class="step-two-b" [ngClass]="{'hide': !stepTwoB && stepTwoBOpened, 'display': stepTwoB, 'dont-display': !stepTwoBOpened}">
-                
+            <h4 class="step">STEP <span style="font-weight: 500;">2</span> OF <span style="font-weight: 500;">3</span></h4>
+            <h5 class="title">Choose your plan.</h5>
+            <p class="center"><span class="check-icon"><mat-icon>done</mat-icon></span> No commitments, cancel anytime.</p>
+            <p class="center"><span class="check-icon"><mat-icon>done</mat-icon></span> Everything on Netflix for one low price.</p>
+            <p class="center"><span class="check-icon"><mat-icon>done</mat-icon></span> Unlimited viewing on all your devices.</p>
+            <div class="justify-center">
+                <button class="btn" (click)="goToStepTwoB()">See the Plans</button> 
             </div>
-
-            <div class="step-two-b">
-                <h4 class="step">STEP <span style="font-weight: 500;">2</span> OF <span style="font-weight: 500;">3</span></h4>
-                <h5 class="title">Choose the plan that’s right for you</h5>
-                <p class="center"><span class="check-icon"><mat-icon>done</mat-icon></span> Watch all you want. Ad-free.</p>
-                <p class="center"><span class="check-icon"><mat-icon>done</mat-icon></span> Recommendations just for you.</p>
-                <p class="center"><span class="check-icon"><mat-icon>done</mat-icon></span> Change or cancel your plan anytime.</p>
-                <table class="table">
-                    <tr class="table-header">
-                        <th></th>
-                        <th>
-                            <div class="plan" (click)='onBasicSelected()' [ngClass]="{'plan-selected': basicSelected}">
-                            <p>Basic</p>
-                            <fa-icon *ngIf="basicSelected" class="arrow-down" [icon]="faCaretDown"></fa-icon>
+        </div> 
+        
+        <div class="step-two-b" [ngClass]="{'hide': !stepTwoB && stepTwoBOpened, 'display': stepTwoB, 'dont-display': !stepTwoBOpened}">
+            <h4 class="step">STEP <span style="font-weight: 500;">2</span> OF <span style="font-weight: 500;">3</span></h4>
+            <h5 class="title">Choose the plan that’s right for you</h5>
+            <p class="center"><span class="check-icon"><mat-icon>done</mat-icon></span> Watch all you want. Ad-free.</p>
+            <p class="center"><span class="check-icon"><mat-icon>done</mat-icon></span> Recommendations just for you.</p>
+            <p class="center"><span class="check-icon"><mat-icon>done</mat-icon></span> Change or cancel your plan anytime.</p>
+            <table class="table">
+                <tr class="table-header">
+                    <th></th>
+                    <th>
+                        <div class="plan" (click)='onBasicSelected()' [ngClass]="{'plan-selected': basicSelected}">
+                        <p>Basic</p>
+                        <fa-icon *ngIf="basicSelected" class="arrow-down" [icon]="faCaretDown"></fa-icon>
+                    </div>
+                    </th>
+                    <th>
+                        <div class="plan" (click)='onStandardSelected()' [ngClass]="{'plan-selected': standardSelected}">
+                            <p>Standard</p>
+                            <fa-icon *ngIf="standardSelected" class="arrow-down" [icon]="faCaretDown"></fa-icon>
                         </div>
-                        </th>
-                        <th>
-                            <div class="plan" (click)='onStandardSelected()' [ngClass]="{'plan-selected': standardSelected}">
-                                <p>Standard</p>
-                                <fa-icon *ngIf="standardSelected" class="arrow-down" [icon]="faCaretDown"></fa-icon>
-                            </div>
-                        </th>
-                        <th>
-                            <div class="plan" (click)='onPremiumSelected()' [ngClass]="{'plan-selected': premiumSelected}">
-                                <p>Premium</p>
-                                <fa-icon *ngIf="premiumSelected" class="arrow-down" [icon]="faCaretDown"></fa-icon>
-                            </div>
-                        </th>
-                    </tr>
-                    <tr class="table-row border-bottom">
-                            <td>Monthly price</td>
-                            <td (click)='onBasicSelected()'><p [ngClass]="{'plan-selected-content': basicSelected}" class="table-content">$9.99</p></td>
-                            <td (click)='onStandardSelected()'><p [ngClass]="{'plan-selected-content': standardSelected}" class="table-content">$14.99</p></td>
-                            <td (click)='onPremiumSelected()'><p [ngClass]="{'plan-selected-content': premiumSelected}" class="table-content">$18.99</p></td>
-                    </tr>
+                    </th>
+                    <th>
+                        <div class="plan" (click)='onPremiumSelected()' [ngClass]="{'plan-selected': premiumSelected}">
+                            <p>Premium</p>
+                            <fa-icon *ngIf="premiumSelected" class="arrow-down" [icon]="faCaretDown"></fa-icon>
+                        </div>
+                    </th>
+                </tr>
+                <tr class="table-row border-bottom">
+                        <td>Monthly price</td>
+                        <td (click)='onBasicSelected()'><p [ngClass]="{'plan-selected-content': basicSelected}" class="table-content">$9.99</p></td>
+                        <td (click)='onStandardSelected()'><p [ngClass]="{'plan-selected-content': standardSelected}" class="table-content">$14.99</p></td>
+                        <td (click)='onPremiumSelected()'><p [ngClass]="{'plan-selected-content': premiumSelected}" class="table-content">$18.99</p></td>
+                </tr>
 
-                    <tr class="table-row border-bottom">
-                        <td>Video quality</td>
-                        <td (click)='onBasicSelected()'><p [ngClass]="{'plan-selected-content': basicSelected}" class="table-content">Good</p></td>
-                        <td (click)='onStandardSelected()'><p [ngClass]="{'plan-selected-content': standardSelected}" class="table-content">Better</p></td>
-                        <td (click)='onPremiumSelected()'><p class="table-content" [ngClass]="{'plan-selected-content': premiumSelected}">Best</p></td>
-                    </tr>
-                    <tr class="table-row border-bottom">
-                        <td>Resolution</td>
-                        <td (click)='onBasicSelected()'><p [ngClass]="{'plan-selected-content': basicSelected}" class="table-content">480p</p></td>
-                        <td (click)='onStandardSelected()'><p [ngClass]="{'plan-selected-content': standardSelected}" class="table-content">1080p</p></td>
-                        <td (click)='onPremiumSelected()'><p [ngClass]="{'plan-selected-content': premiumSelected}" class="table-content">4K+HDR</p></td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Watch on your TV, computer, mobile phone and tablet</td>
-                        <td (click)='onBasicSelected()'><mat-icon [ngClass]="{'plan-selected-content': basicSelected}" class="table-content">done</mat-icon></td>
-                        <td (click)='onStandardSelected()'><mat-icon [ngClass]="{'plan-selected-content': standardSelected}" class="table-content">done</mat-icon></td>
-                        <td (click)='onPremiumSelected()'><mat-icon  [ngClass]="{'plan-selected-content': premiumSelected}" class="table-content">done</mat-icon></td>
-                    </tr>
-                </table>
-                <p class="step-two-b-bottom-msg">HD (720p), Full HD (1080p), Ultra HD (4K) and HDR availability subject to your internet service and device capabilities. Not all content is available in all resolutions. See our Terms of Use for more details.</p>
-                <p class="step-two-b-bottom-msg">Only people who live with you may use your account. Watch on 4 different devices at the same time with Premium, 2 with Standard and 1 with Basic.</p>
-                <button class="btn">Continue</button>
-            </div>
+                <tr class="table-row border-bottom">
+                    <td>Video quality</td>
+                    <td (click)='onBasicSelected()'><p [ngClass]="{'plan-selected-content': basicSelected}" class="table-content">Good</p></td>
+                    <td (click)='onStandardSelected()'><p [ngClass]="{'plan-selected-content': standardSelected}" class="table-content">Better</p></td>
+                    <td (click)='onPremiumSelected()'><p class="table-content" [ngClass]="{'plan-selected-content': premiumSelected}">Best</p></td>
+                </tr>
+                <tr class="table-row border-bottom">
+                    <td>Resolution</td>
+                    <td (click)='onBasicSelected()'><p [ngClass]="{'plan-selected-content': basicSelected}" class="table-content">480p</p></td>
+                    <td (click)='onStandardSelected()'><p [ngClass]="{'plan-selected-content': standardSelected}" class="table-content">1080p</p></td>
+                    <td (click)='onPremiumSelected()'><p [ngClass]="{'plan-selected-content': premiumSelected}" class="table-content">4K+HDR</p></td>
+                </tr>
+                <tr class="table-row">
+                    <td>Watch on your TV, computer, mobile phone and tablet</td>
+                    <td (click)='onBasicSelected()'><mat-icon [ngClass]="{'plan-selected-content': basicSelected}" class="table-content">done</mat-icon></td>
+                    <td (click)='onStandardSelected()'><mat-icon [ngClass]="{'plan-selected-content': standardSelected}" class="table-content">done</mat-icon></td>
+                    <td (click)='onPremiumSelected()'><mat-icon  [ngClass]="{'plan-selected-content': premiumSelected}" class="table-content">done</mat-icon></td>
+                </tr>
+            </table>
+            <p class="step-two-b-bottom-msg">HD (720p), Full HD (1080p), Ultra HD (4K) and HDR availability subject to your internet service and device capabilities. Not all content is available in all resolutions. See our Terms of Use for more details.</p>
+            <p class="step-two-b-bottom-msg">Only people who live with you may use your account. Watch on 4 different devices at the same time with Premium, 2 with Standard and 1 with Basic.</p>
+            <button class="btn" (click)="goTostepThree()">Continue</button>
         </div>
-        
-        
+
+        <div class="step-three" [ngClass]="{'hide': !stepThree && stepThreeOpened, 'display': stepThree, 'dont-display': !stepThreeOpened}">
+            <h4 class="step">STEP <span style="font-weight: 500;">3</span> OF <span style="font-weight: 500;">3</span></h4>
+        </div>
+    </div>
+
+
+
     <div class="sign-in-bottom">
         <div class="sign-in-bottom-wrapper">
             <div class="info-top">
@@ -178,8 +182,3 @@
             </div>
         </div>
     </div>
-    
-
-
-
-<!-- #f3f3f3 -->
